@@ -1,0 +1,9 @@
+{
+    "name": "pa/svg-to-pdf-generator",
+    "description": "azure php pdf worker / generator",
+    "type": "project",
+    "minimum-stability": "dev",
+    "require": {
+        "tecnickcom/tcpdf": "^6.2.13"
+    }
+}
