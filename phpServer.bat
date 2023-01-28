@@ -1,1 +1,0 @@
-php -S 127.0.0.1:%FUNCTIONS_HTTPWORKER_PORT% functionRouter.php
