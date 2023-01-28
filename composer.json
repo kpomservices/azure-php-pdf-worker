@@ -4,6 +4,7 @@
     "type": "project",
     "minimum-stability": "dev",
     "require": {
+        "videlalvaro/azserverless": "*",
         "tecnickcom/tcpdf": "^6.2.13"
     }
 }
