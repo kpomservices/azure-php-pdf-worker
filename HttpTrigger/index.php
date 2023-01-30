@@ -17,7 +17,7 @@
             $pdf = new TCPDF();                 // create TCPDF object with default constructor args
             $pdf->AddPage();                    // pretty self-explanatory
             $pdf->Write(1, $message);           // 1 is line height
-            
+            //https://techinsighter.wordpress.com/2020/01/03/different-parameters-for-tcpdf-output/
             $message = $pdf->Output('hello_world.pdf', "E");    // send the file in
         } else {
             $name = 'EMPTY';
