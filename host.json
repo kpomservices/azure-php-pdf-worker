@@ -1,12 +1,30 @@
 {
-    "version": "2.0",
-    "httpWorker": {
-      "description": {
-        "defaultExecutablePath": "phpServer.bat"
-      }
+	"version": "2.0",
+	"extensionBundle": {
+		"id": "Microsoft.Azure.Functions.ExtensionBundle",
+		"version": "[2.*, 3.0.0)"
+	},
+	"customHandler": {
+		"description": {
+      "defaultExecutablePath": "php",
+      "arguments": [
+        "-S",
+        "0.0.0.0:%FUNCTIONS_CUSTOMHANDLER_PORT%",
+        "vendor/videlalvaro/azserverless/bin/serverless.php"
+      ]
     },
-    "extensionBundle": {
-      "id": "Microsoft.Azure.Functions.ExtensionBundle",
-      "version": "[2.*, 3.0.0)"
+    "enableForwardingHttpRequest": false
+  },
+  "logging": {
+    "logLevel": {
+      "Function.HttpTrigger.User": "Information",
+      "Function.QueueTrigger.User": "Information",
+      "default": "Warning"
+    },
+    "applicationInsights": {
+      "samplingSettings": {
+        "isEnabled": true
+      }
     }
   }
+}
