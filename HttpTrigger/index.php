@@ -1,5 +1,6 @@
 <?php
-use Azserverless\Context\FunctionContext;
+    use Azserverless\Context\FunctionContext;
+    require __DIR__ . '/vendor/autoload.php';
 
     function run(FunctionContext $context) {
 
@@ -12,6 +13,12 @@ use Azserverless\Context\FunctionContext;
         if (array_key_exists('name', $query)) {
             $name = $query['name'];
             $message = 'Hello ' . $query['name'] . '!';
+
+            $pdf = new TCPDF();                 // create TCPDF object with default constructor args
+            $pdf->AddPage();                    // pretty self-explanatory
+            $pdf->Write(1, $message);           // 1 is line height
+            
+            $message = $pdf->Output('hello_world.pdf', "E");    // send the file in
         } else {
             $name = 'EMPTY';
             $message = 'Please pass a name in the query string';
