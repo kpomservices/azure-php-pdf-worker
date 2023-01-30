@@ -1,8 +1,8 @@
 <?php
     use Azserverless\Context\FunctionContext;
-    require __DIR__ . '../vendor/autoload.php';
 
     function run(FunctionContext $context) {
+        require __DIR__ . '../vendor/autoload.php';
 
         $req = $context->inputs['req'];
 
