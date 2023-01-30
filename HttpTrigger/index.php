@@ -1,6 +1,6 @@
 <?php
     use Azserverless\Context\FunctionContext;
-    require __DIR__ . '/vendor/autoload.php';
+    require __DIR__ . '../vendor/autoload.php';
 
     function run(FunctionContext $context) {
 
