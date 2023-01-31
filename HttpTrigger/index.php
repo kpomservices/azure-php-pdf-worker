@@ -35,7 +35,7 @@
 
             $rc = $rows * $cols;
 
-            $jsonData = json_decode($jsonData);
+            // $jsonData = json_decode($jsonData);
 
             //scale to 0.75 for inch based on DPI.
             $scalef = 72 / 96;
