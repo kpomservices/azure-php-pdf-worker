@@ -9,6 +9,8 @@
         $context->log->info('Http trigger invoked');
 
         $query = $req['Query'];        
+        $body = $req['Body'];        
+        $message = $body;
 
         if (array_key_exists('svg', $query)) {
             
