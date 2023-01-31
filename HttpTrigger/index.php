@@ -14,7 +14,7 @@
             
             //$cwidth = 750;
             //$cheight = 600;            
-            $jsonData = $query['jsonData'];
+            $jsonData = utf8_encode($query['jsonData']);
             // $cwidth = $query['cwidth'];
             // $cheight = $query["cheight"];
             // $canvasScale = $query["scale"];
