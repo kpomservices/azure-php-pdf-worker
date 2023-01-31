@@ -12,14 +12,14 @@
         $body = $req['Body'];        
         $message = $body;
 
-        if (array_key_exists('svg', $query)) {
+        if (array_key_exists('svg', $body)) {
             
             //$cwidth = 750;
             //$cheight = 600;            
             // $jsonData = preg_replace("/%u([0-9a-f]{3,4})/i","&#x\\1;",$query['jsonData']); 
             // $jsonData = html_entity_decode($jsonData,null,'UTF-8');
             // $jsonData = urldecode($query['jsonData']);
-            $jsonData = $query['jsonData'];
+            $jsonData = $body['jsonData'];
             $message = $jsonData;
             // $cwidth = $query['cwidth'];
             // $cheight = $query["cheight"];
