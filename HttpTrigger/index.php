@@ -79,6 +79,7 @@
             $pdf->SetDisplayMode(100);
 
             $totalcanvas = count($jsonData);
+            $message = $totalcanvas;
 
             $offsetwidth = $cwidth * $scalef;
 
