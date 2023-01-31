@@ -1,2 +1,6 @@
 /vendor/
+testpdf.php
 pdfgen.php
+sample.html
+/outputpdfs/
+getsvg.php
