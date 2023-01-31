@@ -396,8 +396,8 @@
             $message = 'Please pass a name in the query string';
         }
 
-        $body = file_get_contents(getenv('req'));
-        $message = rtrim($body, "\n\r");
+        // $body = file_get_contents(getenv('req'));
+        // $message = rtrim($body, "\n\r");
 
         $context->outputs['outputQueueItem'] = json_encode($name);
         $context->log->info(sprintf('Adding queue item: %s', $name));
