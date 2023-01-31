@@ -344,6 +344,7 @@
 
             $pdf->Close();
 
+            $name = 'PDF';
             $message = $pdf->Output('svgtopdf.pdf', "E");    // send the file in
 
             function Hex2RGB($color)
