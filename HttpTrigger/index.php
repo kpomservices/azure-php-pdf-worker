@@ -100,6 +100,7 @@
 
                 public $textDecoration;
             }
+            $message = $totalcanvas;
             for ($x = 0; $x < $totalcanvas; $x += $rc) {
                 $pdf->AddPage();
 
