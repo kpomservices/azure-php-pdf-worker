@@ -378,7 +378,7 @@
             }            
         } else {
             $name = 'EMPTY';
-            $message = 'Please pass a name in the query string';
+            $message .= 'Please pass a name in the query string';
         }
 
         $context->outputs['outputQueueItem'] = json_encode($name);
