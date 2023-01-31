@@ -9,17 +9,18 @@
         $context->log->info('Http trigger invoked');
 
         $query = $req['Query'];        
-        $body = $req['Body'];        
+        $body = $req['Body'];       
+        $body = json_decode($body); 
         $message = $body;
 
-        if (array_key_exists('svg', $body)) {
+        if (isset($body->svg)) {
             
             //$cwidth = 750;
             //$cheight = 600;            
             // $jsonData = preg_replace("/%u([0-9a-f]{3,4})/i","&#x\\1;",$query['jsonData']); 
             // $jsonData = html_entity_decode($jsonData,null,'UTF-8');
             // $jsonData = urldecode($query['jsonData']);
-            $jsonData = $body['jsonData'];
+            $jsonData = $body->jsonData;
             $message = $jsonData;
             // $cwidth = $query['cwidth'];
             // $cheight = $query["cheight"];
