@@ -101,6 +101,127 @@
             }
             $message = $totalcanvas;
             for ($x = 0; $x < $totalcanvas; $x += $rc) {
+                $pdf->AddPage();
+
+                $pdf->StartTransform();
+
+                $colscount = 0;
+
+                $rowscount = 0;
+
+                for ($y = $x; $y < $x + $rc; $y++) {
+                    $dataString = $jsonData[$y];
+                    $message = $dataString;
+
+                    //Replace font path to real and current path. If not than font will not be loaded
+
+                    $dataString = str_replace(
+                        "https://www.kpomservices.com/",
+                        "../",
+                        $dataString
+                    );
+
+                    if ($colscount >= $cols) {
+                        $colscount = 0;
+
+                        $rowscount++;
+                    }
+
+                    // start a new XObject Template and set transparency group option
+
+                    $template_id = $pdf->startTemplate(
+                        $offsetwidth * 2,
+                        $offsetheight * 2,
+                        true
+                    );
+
+                    $pdf->StartTransform();
+
+                    // Set Clipping Mask
+
+                    $pdf->Rect(
+                        $offsetwidth,
+                        $offsetheight,
+                        $offsetwidth,
+                        $offsetheight,
+                        "CNZ"
+                    );
+
+                    //Return attribute font name
+
+                    $decoded_xml = simplexml_load_string($dataString);
+
+                    $fontArr = [];
+
+                    $fontNamesArr = [];
+
+                    $pdf->setXY($offsetwidth, $offsetheight);
+
+                    $pdf->ScaleXY(($scalef / $canvasScale) * 100);
+                    $message = $dataString;
+                    $pdf->ImageSVG("@" . $dataString);
+
+                    $pdf->StopTransform();
+
+                    // end the current Template
+
+                    $pdf->endTemplate();
+
+                    $pdf->printTemplate(
+                        $template_id,
+                        $offsetwidth * $colscount - $offsetwidth + $cmp,
+                        $offsetheight * $rowscount - $offsetheight + $cmp,
+                        $offsetwidth * 2,
+                        $offsetheight * 2,
+                        "",
+                        "",
+                        false
+                    );
+
+                    if ($savecrop != "false") {
+                        $pdf->cropMark(
+                            $offsetwidth * $colscount + $cmp,
+                            $offsetheight * $rowscount + $cmp,
+                            $cmp,
+                            $cmp,
+                            "TL",
+                            [136, 136, 136]
+                        );
+
+                        $pdf->cropMark(
+                            $offsetwidth * $colscount + $offsetwidth + $cmp,
+                            $offsetheight * $rowscount + $cmp,
+                            $cmp,
+                            $cmp,
+                            "TR",
+                            [136, 136, 136]
+                        );
+
+                        $pdf->cropMark(
+                            $offsetwidth * $colscount + $cmp,
+                            $offsetheight * $rowscount + $offsetheight + $cmp,
+                            $cmp,
+                            $cmp,
+                            "BL",
+                            [136, 136, 136]
+                        );
+
+                        $pdf->cropMark(
+                            $offsetwidth * $colscount + $offsetwidth + $cmp,
+                            $offsetheight * $rowscount + $offsetheight + $cmp,
+                            $cmp,
+                            $cmp,
+                            "BR",
+                            [136, 136, 136]
+                        );
+                    }
+
+                    //$pdf->printTemplate($template_id, ($offsetwidth * $colscount), ($offsetheight * $rowscount), $offsetwidth, $offsetheight, '', '', false);
+
+                    $colscount++;
+                }
+
+                $pdf->StopTransform();
             }
 
             $pdf->Close();
