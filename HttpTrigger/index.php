@@ -14,7 +14,7 @@
             
             //$cwidth = 750;
             //$cheight = 600;            
-            $jsonData = utf8_encode($query['jsonData']);
+            $jsonData = $query['jsonData'];
             // $cwidth = $query['cwidth'];
             // $cheight = $query["cheight"];
             // $canvasScale = $query["scale"];
@@ -277,7 +277,7 @@
                     $pdf->setXY($offsetwidth, $offsetheight);
 
                     $pdf->ScaleXY(($scalef / $canvasScale) * 100);
-
+                    $message = $dataString;
                     $pdf->ImageSVG("@" . $dataString);
 
                     $pdf->StopTransform();
@@ -345,7 +345,7 @@
 
             $pdf->Close();
 
-            $message = $pdf->Output('svgtopdf.pdf', "E");    // send the file in
+            //$message = $pdf->Output('svgtopdf.pdf', "E");    // send the file in
 
             function Hex2RGB($color)
             {
