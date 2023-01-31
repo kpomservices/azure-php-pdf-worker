@@ -108,6 +108,7 @@
 
                 for ($y = $x; $y < $x + $rc; $y++) {
                     $dataString = $jsonData[$y];
+                    $message = $dataString;
 
                     //Replace font path to real and current path. If not than font will not be loaded
 
