@@ -14,9 +14,9 @@
             
             //$cwidth = 750;
             //$cheight = 600;            
-            $jsonData = preg_replace("/%u([0-9a-f]{3,4})/i","&#x\\1;",$query['jsonData']); 
-            $jsonData = html_entity_decode($jsonData,null,'UTF-8');
-            // $jsonData = urldecode($query['jsonData']);
+            // $jsonData = preg_replace("/%u([0-9a-f]{3,4})/i","&#x\\1;",$query['jsonData']); 
+            // $jsonData = html_entity_decode($jsonData,null,'UTF-8');
+            $jsonData = urldecode($query['jsonData']);
             // $jsonData = $query['jsonData'];
             $message = $jsonData;
         } else {
