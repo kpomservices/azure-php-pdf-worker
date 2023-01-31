@@ -16,7 +16,7 @@
             //$cheight = 600;            
             // $jsonData = preg_replace("/%u([0-9a-f]{3,4})/i","&#x\\1;",$query['jsonData']); 
             // $jsonData = html_entity_decode($jsonData,null,'UTF-8');
-            // $jsonData = urldecode($query['jsonData']);
+            $jsonData = urldecode($query['jsonData']);
             $jsonData = $query['jsonData'];
             $message = $jsonData;
             // $cwidth = $query['cwidth'];
@@ -98,7 +98,7 @@
 
                 public $textDecoration;
             }
-
+            $totalcanvas = 0;
             for ($x = 0; $x < $totalcanvas; $x += $rc) {
                 $pdf->AddPage();
 
