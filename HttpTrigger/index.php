@@ -9,18 +9,8 @@
         $context->log->info('Http trigger invoked');
 
         $query = $req['Query'];        
-        $body = $req['body'];
 
-        if (array_key_exists('name', $body)) {
-            $name = $body['name'];
-            $message = 'Hello ' . $body['name'] . '!';
-
-            $pdf = new TCPDF();                 // create TCPDF object with default constructor args
-            $pdf->AddPage();                    // pretty self-explanatory
-            $pdf->Write(1, $message);           // 1 is line height
-            //https://techinsighter.wordpress.com/2020/01/03/different-parameters-for-tcpdf-output/
-            $message = $pdf->Output('hello_world.pdf', "E");    // send the file in            
-        } else if (array_key_exists('svg', $query)) {
+        if (array_key_exists('svg', $query)) {
             
             //$cwidth = 750;
             //$cheight = 600;            
@@ -395,9 +385,6 @@
             $name = 'EMPTY';
             $message = 'Please pass a name in the query string';
         }
-
-        // $body = file_get_contents(getenv('req'));
-        // $message = rtrim($body, "\n\r");
 
         $context->outputs['outputQueueItem'] = json_encode($name);
         $context->log->info(sprintf('Adding queue item: %s', $name));
