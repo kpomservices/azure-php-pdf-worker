@@ -15,12 +15,12 @@
             //$cwidth = 750;
             //$cheight = 600;            
             $jsonData = $query['jsonData'];
-            $cwidth = $query['cwidth'];
-            $cheight = $query["cheight"];
-            $canvasScale = $query["scale"];
+            // $cwidth = $query['cwidth'];
+            // $cheight = $query["cheight"];
+            // $canvasScale = $query["scale"];
             // $jsonData = "Hello World";
-            // $cwidth = 5*96;
-            // $cheight = 7*96;
+            $cwidth = 5*96;
+            $cheight = 7*96;
             $savecrop = 'false';
             $rows = 1;
             $cols = 1;
