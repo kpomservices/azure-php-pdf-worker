@@ -14,7 +14,7 @@
             
             //$cwidth = 750;
             //$cheight = 600;            
-            $jsonData = urldecode($query['jsonData']);
+            $jsonData = rawurldecode($query['jsonData']);
             $message = $jsonData;
             // $cwidth = $query['cwidth'];
             // $cheight = $query["cheight"];
