@@ -8,9 +8,9 @@
 
         $context->log->info('Http trigger invoked');
 
-        $query = $req['Query'];
-        
+        $query = $req['Query'];        
         $body = $req['body'];
+
         if (array_key_exists('name', $body)) {
             $name = $body['name'];
             $message = 'Hello ' . $body['name'] . '!';
@@ -395,6 +395,9 @@
             $name = 'EMPTY';
             $message = 'Please pass a name in the query string';
         }
+
+        $body = file_get_contents(getenv('req'));
+        $message = rtrim($body, "\n\r");
 
         $context->outputs['outputQueueItem'] = json_encode($name);
         $context->log->info(sprintf('Adding queue item: %s', $name));
