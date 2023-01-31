@@ -15,6 +15,7 @@
             //$cwidth = 750;
             //$cheight = 600;            
             $jsonData = urldecode($query['jsonData']);
+            $message = $jsonData;
             // $cwidth = $query['cwidth'];
             // $cheight = $query["cheight"];
             // $canvasScale = $query["scale"];
@@ -79,7 +80,6 @@
             $pdf->SetDisplayMode(100);
 
             $totalcanvas = count($jsonData);
-            $message = $totalcanvas;
 
             $offsetwidth = $cwidth * $scalef;
 
