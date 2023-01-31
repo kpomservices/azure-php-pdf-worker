@@ -99,7 +99,6 @@
 
                 public $textDecoration;
             }
-            $message = $totalcanvas;
             for ($x = 0; $x < $totalcanvas; $x += $rc) {
                 $pdf->AddPage();
 
@@ -111,7 +110,6 @@
 
                 for ($y = $x; $y < $x + $rc; $y++) {
                     $dataString = $jsonData[$y];
-                    $message = $dataString;
 
                     //Replace font path to real and current path. If not than font will not be loaded
 
@@ -155,10 +153,130 @@
 
                     $fontNamesArr = [];
 
+                    //Store fonts into an array
+
+                    // foreach ($decoded_xml[0] as $i => $xmlList) {
+                    //     $fontFamilyArr = $xmlList->text;
+
+                    //     $fontName = xml_attribute($fontFamilyArr, "font-family");
+
+                    //     $fontStyle = xml_attribute($fontFamilyArr, "font-style");
+
+                    //     $fontWeight = xml_attribute($fontFamilyArr, "font-weight");
+
+                    //     $textDecoration = xml_attribute($fontFamilyArr, "text-decoration");
+
+                    //     if (!in_array($fontName, $fontNamesArr)) {
+                    //         $localFont = new Font();
+
+                    //         $localFont->fontName = $fontName;
+
+                    //         $localFont->fontStyle = $fontStyle;
+
+                    //         $localFont->fontWeight = $fontWeight;
+
+                    //         $localFont->textDecoration = $textDecoration;
+
+                    //         array_push($fontArr, $localFont);
+
+                    //         array_push($fontNamesArr, $fontName);
+                    //     }
+                    // }
+
+                    //Load neccesory fonts
+                    // foreach ($fontArr as $localFont) {
+                    //     $fontFamily = $localFont->fontName;
+
+                    //     $fontStyle = $localFont->fontStyle;
+
+                    //     $fontWeight = $localFont->fontWeight;
+
+                    //     $textDecoration = $localFont->textDecoration;
+
+                    //     if ($fontFamily != "" && strlen($fontFamily) > 0) {
+                    //         //$folderName = str_replace(" ","_", $fontFamily);
+
+                    //         $folderName = $fontFamily;
+
+                    //         $fontFileName = str_replace(" ", "", $fontFamily);
+
+                    //         if ($fontStyle == "italic" && $fontWeight == "bold") {
+                    //             $fontStyle = "BoldItalic";
+                    //         } elseif ($fontStyle == "italic") {
+                    //             $fontStyle = "Italic";
+                    //         } elseif ($fontWeight == "bold") {
+                    //             $fontStyle = "Bold";
+                    //         } else {
+                    //             $fontStyle = "Regular";
+                    //         }
+
+                    //         $fontname = "";
+
+                    //         $fontpath =
+                    //             "./tcpdf/fonts/googlefonts/" .
+                    //             $folderName .
+                    //             "/" .
+                    //             $fontFileName .
+                    //             "-" .
+                    //             $fontStyle .
+                    //             ".ttf";
+
+                    //         if (file_exists($fontpath)) {
+                    //             $fontname = TCPDF_FONTS::addTTFfont(
+                    //                 $fontpath,
+                    //                 "TrueTypeUnicode",
+                    //                 "",
+                    //                 96
+                    //             );
+                    //         } else {
+                    //             $fontpath =
+                    //                 "./tcpdf/fonts/googlefonts/" .
+                    //                 $folderName .
+                    //                 "/" .
+                    //                 $fontFileName .
+                    //                 ".ttf";
+
+                    //             if (file_exists($fontpath)) {
+                    //                 $fontname = TCPDF_FONTS::addTTFfont(
+                    //                     $fontpath,
+                    //                     "TrueTypeUnicode",
+                    //                     "",
+                    //                     96
+                    //                 );
+                    //             } else {
+                    //                 $fontpath =
+                    //                     "./tcpdf/fonts/googlefonts/" .
+                    //                     $folderName .
+                    //                     "/" .
+                    //                     $fontFileName .
+                    //                     "-Regular.ttf";
+
+                    //                 if (file_exists($fontpath)) {
+                    //                     $fontname = TCPDF_FONTS::addTTFfont(
+                    //                         $fontpath,
+                    //                         "TrueTypeUnicode",
+                    //                         "",
+                    //                         96
+                    //                     );
+                    //                 }
+                    //             }
+                    //         }
+
+                    //         if ($fontStyle == "Italic") {
+                    //             $fontStyle = "i";
+                    //         } elseif ($fontStyle == "Bold") {
+                    //             $fontStyle = "b";
+                    //         } else {
+                    //             $fontStyle = "";
+                    //         }
+
+                    //         $pdf->SetFont($fontname, $fontStyle, 14, "", false);
+                    //     }
+                    // }
+
                     $pdf->setXY($offsetwidth, $offsetheight);
 
                     $pdf->ScaleXY(($scalef / $canvasScale) * 100);
-                    $message = $dataString;
                     $pdf->ImageSVG("@" . $dataString);
 
                     $pdf->StopTransform();
@@ -226,7 +344,7 @@
 
             $pdf->Close();
 
-            //$message = $pdf->Output('svgtopdf.pdf', "E");    // send the file in
+            $message = $pdf->Output('svgtopdf.pdf', "E");    // send the file in
 
             function Hex2RGB($color)
             {
