@@ -347,29 +347,29 @@
             $name = 'PDF';
             $message = $pdf->Output('svgtopdf.pdf', "E");    // send the file in
 
-            function Hex2RGB($color)
-            {
-                $color = str_replace("#", "", $color);
+            // function Hex2RGB($color)
+            // {
+            //     $color = str_replace("#", "", $color);
 
-                if (strlen($color) != 6) {
-                    return [0, 0, 0];
-                }
+            //     if (strlen($color) != 6) {
+            //         return [0, 0, 0];
+            //     }
 
-                $rgb = [];
+            //     $rgb = [];
 
-                for ($x = 0; $x < 3; $x++) {
-                    $rgb[$x] = hexdec(substr($color, 2 * $x, 2));
-                }
+            //     for ($x = 0; $x < 3; $x++) {
+            //         $rgb[$x] = hexdec(substr($color, 2 * $x, 2));
+            //     }
 
-                return $rgb;
-            }
+            //     return $rgb;
+            // }
 
-            function xml_attribute($object, $attribute)
-            {
-                if (isset($object[$attribute])) {
-                    return (string) $object[$attribute];
-                }
-            }            
+            // function xml_attribute($object, $attribute)
+            // {
+            //     if (isset($object[$attribute])) {
+            //         return (string) $object[$attribute];
+            //     }
+            // }            
         } else {
             $name = 'EMPTY';
             $message .= 'Please pass a name in the query string';
