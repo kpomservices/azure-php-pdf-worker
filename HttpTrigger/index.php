@@ -344,7 +344,7 @@
             $contentType = 'text/plain';
             $name = 'PDF';
             // $currentDate = gmdate("D, d M Y H:i:s T", time());
-            $pdffilename = 'pdf'.time().'pdf';
+            $pdffilename = 'pdf'.time().'.pdf';
             $pdf->Output(__DIR__ . '/../outputpdfs/'.$pdffilename, "F");    // send the file in
 
             $accesskey = "/1trovN9uvAh0Cvziv/GTgI9V/P/IQJg0BANb9W8beMtTd2KtwnMkpQd4eDz1JTltNoDsl/QdZLj+AStS1RcDg==";
