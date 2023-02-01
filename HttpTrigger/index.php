@@ -184,95 +184,95 @@
                     }
 
                     //Load neccesory fonts
-                    // foreach ($fontArr as $localFont) {
-                    //     $fontFamily = $localFont->fontName;
+                    foreach ($fontArr as $localFont) {
+                        $fontFamily = $localFont->fontName;
 
-                    //     $fontStyle = $localFont->fontStyle;
+                        $fontStyle = $localFont->fontStyle;
 
-                    //     $fontWeight = $localFont->fontWeight;
+                        $fontWeight = $localFont->fontWeight;
 
-                    //     $textDecoration = $localFont->textDecoration;
+                        $textDecoration = $localFont->textDecoration;
 
-                    //     if ($fontFamily != "" && strlen($fontFamily) > 0) {
-                    //         //$folderName = str_replace(" ","_", $fontFamily);
+                        if ($fontFamily != "" && strlen($fontFamily) > 0) {
+                            //$folderName = str_replace(" ","_", $fontFamily);
 
-                    //         $folderName = $fontFamily;
+                            $folderName = $fontFamily;
 
-                    //         $fontFileName = str_replace(" ", "", $fontFamily);
+                            $fontFileName = str_replace(" ", "", $fontFamily);
 
-                    //         if ($fontStyle == "italic" && $fontWeight == "bold") {
-                    //             $fontStyle = "BoldItalic";
-                    //         } elseif ($fontStyle == "italic") {
-                    //             $fontStyle = "Italic";
-                    //         } elseif ($fontWeight == "bold") {
-                    //             $fontStyle = "Bold";
-                    //         } else {
-                    //             $fontStyle = "Regular";
-                    //         }
+                            if ($fontStyle == "italic" && $fontWeight == "bold") {
+                                $fontStyle = "BoldItalic";
+                            } elseif ($fontStyle == "italic") {
+                                $fontStyle = "Italic";
+                            } elseif ($fontWeight == "bold") {
+                                $fontStyle = "Bold";
+                            } else {
+                                $fontStyle = "Regular";
+                            }
 
-                    //         $fontname = "";
+                            $fontname = "";
 
-                    //         $fontpath =
-                    //             "./tcpdf/fonts/googlefonts/" .
-                    //             $folderName .
-                    //             "/" .
-                    //             $fontFileName .
-                    //             "-" .
-                    //             $fontStyle .
-                    //             ".ttf";
+                            $fontpath =
+                                "./tcpdf/fonts/googlefonts/" .
+                                $folderName .
+                                "/" .
+                                $fontFileName .
+                                "-" .
+                                $fontStyle .
+                                ".ttf";
 
-                    //         if (file_exists($fontpath)) {
-                    //             $fontname = TCPDF_FONTS::addTTFfont(
-                    //                 $fontpath,
-                    //                 "TrueTypeUnicode",
-                    //                 "",
-                    //                 96
-                    //             );
-                    //         } else {
-                    //             $fontpath =
-                    //                 "./tcpdf/fonts/googlefonts/" .
-                    //                 $folderName .
-                    //                 "/" .
-                    //                 $fontFileName .
-                    //                 ".ttf";
+                            if (file_exists($fontpath)) {
+                                $fontname = TCPDF_FONTS::addTTFfont(
+                                    $fontpath,
+                                    "TrueTypeUnicode",
+                                    "",
+                                    96
+                                );
+                            } else {
+                                $fontpath =
+                                    "./tcpdf/fonts/googlefonts/" .
+                                    $folderName .
+                                    "/" .
+                                    $fontFileName .
+                                    ".ttf";
 
-                    //             if (file_exists($fontpath)) {
-                    //                 $fontname = TCPDF_FONTS::addTTFfont(
-                    //                     $fontpath,
-                    //                     "TrueTypeUnicode",
-                    //                     "",
-                    //                     96
-                    //                 );
-                    //             } else {
-                    //                 $fontpath =
-                    //                     "./tcpdf/fonts/googlefonts/" .
-                    //                     $folderName .
-                    //                     "/" .
-                    //                     $fontFileName .
-                    //                     "-Regular.ttf";
+                                if (file_exists($fontpath)) {
+                                    $fontname = TCPDF_FONTS::addTTFfont(
+                                        $fontpath,
+                                        "TrueTypeUnicode",
+                                        "",
+                                        96
+                                    );
+                                } else {
+                                    $fontpath =
+                                        "./tcpdf/fonts/googlefonts/" .
+                                        $folderName .
+                                        "/" .
+                                        $fontFileName .
+                                        "-Regular.ttf";
 
-                    //                 if (file_exists($fontpath)) {
-                    //                     $fontname = TCPDF_FONTS::addTTFfont(
-                    //                         $fontpath,
-                    //                         "TrueTypeUnicode",
-                    //                         "",
-                    //                         96
-                    //                     );
-                    //                 }
-                    //             }
-                    //         }
+                                    if (file_exists($fontpath)) {
+                                        $fontname = TCPDF_FONTS::addTTFfont(
+                                            $fontpath,
+                                            "TrueTypeUnicode",
+                                            "",
+                                            96
+                                        );
+                                    }
+                                }
+                            }
 
-                    //         if ($fontStyle == "Italic") {
-                    //             $fontStyle = "i";
-                    //         } elseif ($fontStyle == "Bold") {
-                    //             $fontStyle = "b";
-                    //         } else {
-                    //             $fontStyle = "";
-                    //         }
+                            if ($fontStyle == "Italic") {
+                                $fontStyle = "i";
+                            } elseif ($fontStyle == "Bold") {
+                                $fontStyle = "b";
+                            } else {
+                                $fontStyle = "";
+                            }
 
-                    //         $pdf->SetFont($fontname, $fontStyle, 14, "", false);
-                    //     }
-                    // }
+                            $pdf->SetFont($fontname, $fontStyle, 14, "", false);
+                        }
+                    }
 
                     $pdf->setXY($offsetwidth, $offsetheight);
 
@@ -349,22 +349,6 @@
             $name = 'PDF';
             $message = $pdf->Output('svgtopdf.pdf', "E");    // send the file in
             // $message = "svgtopdf.pdf";
-            // function Hex2RGB($color)
-            // {
-            //     $color = str_replace("#", "", $color);
-
-            //     if (strlen($color) != 6) {
-            //         return [0, 0, 0];
-            //     }
-
-            //     $rgb = [];
-
-            //     for ($x = 0; $x < 3; $x++) {
-            //         $rgb[$x] = hexdec(substr($color, 2 * $x, 2));
-            //     }
-
-            //     return $rgb;
-            // }   
         } else {
             $contentType = "text/plain";
             $name = 'EMPTY';
@@ -387,5 +371,22 @@
         if (isset($object[$attribute])) {
             return (string) $object[$attribute];
         }
-    }         
+    }
+    
+    function Hex2RGB($color)
+    {
+        $color = str_replace("#", "", $color);
+
+        if (strlen($color) != 6) {
+            return [0, 0, 0];
+        }
+
+        $rgb = [];
+
+        for ($x = 0; $x < 3; $x++) {
+            $rgb[$x] = hexdec(substr($color, 2 * $x, 2));
+        }
+
+        return $rgb;
+    }            
 ?>
