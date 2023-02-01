@@ -349,7 +349,8 @@
             $storageAccount = 'papdfgen';
             //$filetoUpload = realpath(__DIR__ . '/../outputpdfs/svgtopdf.pdf');
             $filetoUpload = __DIR__ . '/../outputpdfs/svgtopdf.pdf';
-            $containerName = 'pa-pdfgen97408e';
+            //$containerName = 'pa-pdfgen97408e';
+            $containerName = 'outputpdfs';
             $blobName = 'svgtopdf.pdf';
             
             $destinationURL = "https://$storageAccount.blob.core.windows.net/$containerName/$blobName";
