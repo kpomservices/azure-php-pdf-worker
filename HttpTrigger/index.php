@@ -213,7 +213,7 @@
                             $fontname = "";
 
                             $fontpath =
-                                "./tcpdf/fonts/googlefonts/" .
+                                "../googlefonts/" .
                                 $folderName .
                                 "/" .
                                 $fontFileName .
@@ -230,7 +230,7 @@
                                 );
                             } else {
                                 $fontpath =
-                                    "./tcpdf/fonts/googlefonts/" .
+                                    "../googlefonts/" .
                                     $folderName .
                                     "/" .
                                     $fontFileName .
@@ -245,7 +245,7 @@
                                     );
                                 } else {
                                     $fontpath =
-                                        "./tcpdf/fonts/googlefonts/" .
+                                        "../googlefonts/" .
                                         $folderName .
                                         "/" .
                                         $fontFileName .
