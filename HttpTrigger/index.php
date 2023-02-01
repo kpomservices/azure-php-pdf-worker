@@ -364,14 +364,7 @@
             //     }
 
             //     return $rgb;
-            // }
-
-            function xml_attribute($object, $attribute)
-            {
-                if (isset($object[$attribute])) {
-                    return (string) $object[$attribute];
-                }
-            }            
+            // }   
         } else {
             $contentType = "text/plain";
             $name = 'EMPTY';
@@ -388,4 +381,11 @@
             ]
         ];
     }
+
+    function xml_attribute($object, $attribute)
+    {
+        if (isset($object[$attribute])) {
+            return (string) $object[$attribute];
+        }
+    }         
 ?>
