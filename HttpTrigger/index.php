@@ -344,6 +344,7 @@
 
             $pdf->Close();
 
+            $contentType = "application/pdf";
             $name = 'PDF';
             $message = $pdf->Output('svgtopdf.pdf', "E");    // send the file in
 
@@ -371,6 +372,7 @@
             //     }
             // }            
         } else {
+            $contentType = "text/plain";
             $name = 'EMPTY';
             $message .= 'Please pass a name in the query string';
         }
@@ -381,7 +383,7 @@
         return [
             'body' => $message,
             'headers' => [
-                'Content-type' => 'text/plain'
+                'Content-type' => $contentType
             ]
         ];
     }
