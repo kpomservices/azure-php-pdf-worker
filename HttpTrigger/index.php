@@ -344,15 +344,16 @@
             $contentType = 'text/plain';
             $name = 'PDF';
             $currentDate = gmdate("D, d M Y H:i:s T", time());
-            $pdf->Output(__DIR__ . '/../outputpdfs/pdf'.$currentDate.'pdf', "F");    // send the file in
+            $pdffilename = 'pdf'.$currentDate.'pdf';
+            $pdf->Output(__DIR__ . '/../outputpdfs/'.$pdffilename, "F");    // send the file in
 
             $accesskey = "/1trovN9uvAh0Cvziv/GTgI9V/P/IQJg0BANb9W8beMtTd2KtwnMkpQd4eDz1JTltNoDsl/QdZLj+AStS1RcDg==";
             $storageAccount = 'papdfgen';
             //$filetoUpload = realpath(__DIR__ . '/../outputpdfs/svgtopdf.pdf');
-            $filetoUpload = __DIR__ . '/../outputpdfs/svgtopdf.pdf';
+            $filetoUpload = __DIR__ . '/../outputpdfs/'.$pdffilename;
             //$containerName = 'pa-pdfgen97408e';
             $containerName = 'outputpdfs';
-            $blobName = 'svgtopdf.pdf';
+            $blobName = $pdffilename;
             
             $destinationURL = "https://$storageAccount.blob.core.windows.net/$containerName/$blobName";
             
