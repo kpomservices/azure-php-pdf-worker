@@ -155,33 +155,33 @@
 
                     //Store fonts into an array
 
-                    // foreach ($decoded_xml[0] as $i => $xmlList) {
-                    //     $fontFamilyArr = $xmlList->text;
+                    foreach ($decoded_xml[0] as $i => $xmlList) {
+                        $fontFamilyArr = $xmlList->text;
 
-                    //     $fontName = xml_attribute($fontFamilyArr, "font-family");
+                        $fontName = xml_attribute($fontFamilyArr, "font-family");
 
-                    //     $fontStyle = xml_attribute($fontFamilyArr, "font-style");
+                        $fontStyle = xml_attribute($fontFamilyArr, "font-style");
 
-                    //     $fontWeight = xml_attribute($fontFamilyArr, "font-weight");
+                        $fontWeight = xml_attribute($fontFamilyArr, "font-weight");
 
-                    //     $textDecoration = xml_attribute($fontFamilyArr, "text-decoration");
+                        $textDecoration = xml_attribute($fontFamilyArr, "text-decoration");
 
-                    //     if (!in_array($fontName, $fontNamesArr)) {
-                    //         $localFont = new Font();
+                        if (!in_array($fontName, $fontNamesArr)) {
+                            $localFont = new Font();
 
-                    //         $localFont->fontName = $fontName;
+                            $localFont->fontName = $fontName;
 
-                    //         $localFont->fontStyle = $fontStyle;
+                            $localFont->fontStyle = $fontStyle;
 
-                    //         $localFont->fontWeight = $fontWeight;
+                            $localFont->fontWeight = $fontWeight;
 
-                    //         $localFont->textDecoration = $textDecoration;
+                            $localFont->textDecoration = $textDecoration;
 
-                    //         array_push($fontArr, $localFont);
+                            array_push($fontArr, $localFont);
 
-                    //         array_push($fontNamesArr, $fontName);
-                    //     }
-                    // }
+                            array_push($fontNamesArr, $fontName);
+                        }
+                    }
 
                     //Load neccesory fonts
                     // foreach ($fontArr as $localFont) {
