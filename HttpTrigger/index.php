@@ -8,17 +8,15 @@
 
         $context->log->info('Http trigger invoked');
 
-        $query = $req['Query'];        
-        $body = $req['Body'];       
+        $query = $req['Query'];//request parameters        
+        $body = $req['Body']; //post body paramters
+               
         $body = json_decode($body); 
        
         if (isset($body->svg)) {
             
             //$cwidth = 750;
             //$cheight = 600;            
-            // $jsonData = preg_replace("/%u([0-9a-f]{3,4})/i","&#x\\1;",$query['jsonData']); 
-            // $jsonData = html_entity_decode($jsonData,null,'UTF-8');
-            // $jsonData = urldecode($query['jsonData']);
             $jsonData = $body->jsonData;
             // $cwidth = $query['cwidth'];
             // $cheight = $query["cheight"];
@@ -32,8 +30,6 @@
             $canvasScale = 1;
 
             $rc = $rows * $cols;
-
-            // $jsonData = json_decode($jsonData);
 
             //scale to 0.75 for inch based on DPI.
             $scalef = 72 / 96;
@@ -347,8 +343,19 @@
             // $contentType = "application/pdf";
             $contentType = 'text/plain';
             $name = 'PDF';
-            $message = $pdf->Output('svgtopdf.pdf', "E");    // send the file in
-            // $message = "svgtopdf.pdf";
+            $message = $pdf->Output(__DIR__ . '/../outputpdfs/svgtopdf.pdf', "F");    // send the file in
+
+            $accesskey = "/1trovN9uvAh0Cvziv/GTgI9V/P/IQJg0BANb9W8beMtTd2KtwnMkpQd4eDz1JTltNoDsl/QdZLj+AStS1RcDg==";
+            $storageAccount = 'papdfgen';
+            $filetoUpload = realpath(__DIR__ . '/../outputpdfs/svgtopdf.pdf');
+            $containerName = 'pa-pdfgen97408e';
+            $blobName = 'svgtopdf.pdf';
+            
+            $destinationURL = "https://$storageAccount.blob.core.windows.net/$containerName/$blobName";
+            
+            uploadBlob($filetoUpload, $storageAccount, $containerName, $blobName, $destinationURL, $accesskey);
+
+            //$message = $pdf->Output('svgtopdf.pdf', "E");    // send the file in
         } else {
             $contentType = "text/plain";
             $name = 'EMPTY';
@@ -365,6 +372,92 @@
             ]
         ];
     }
+    
+    //https://stackoverflow.com/questions/41682393/simple-php-curl-file-upload-to-azure-storage-blob
+    function uploadBlob($filetoUpload, $storageAccount, $containerName, $blobName, $destinationURL, $accesskey) {
+
+        $currentDate = gmdate("D, d M Y H:i:s T", time());
+        $handle = fopen($filetoUpload, "r");
+        $fileLen = filesize($filetoUpload);
+    
+        $headerResource = "x-ms-blob-cache-control:max-age=3600\nx-ms-blob-type:BlockBlob\nx-ms-date:$currentDate\nx-ms-version:2015-12-11";
+        $urlResource = "/$storageAccount/$containerName/$blobName";
+    
+        $arraysign = array();
+        $arraysign[] = 'PUT';               /*HTTP Verb*/  
+        $arraysign[] = '';                  /*Content-Encoding*/  
+        $arraysign[] = '';                  /*Content-Language*/  
+        $arraysign[] = $fileLen;            /*Content-Length (include value when zero)*/  
+        $arraysign[] = '';                  /*Content-MD5*/  
+        $arraysign[] = 'image/png';         /*Content-Type*/  
+        $arraysign[] = '';                  /*Date*/  
+        $arraysign[] = '';                  /*If-Modified-Since */  
+        $arraysign[] = '';                  /*If-Match*/  
+        $arraysign[] = '';                  /*If-None-Match*/  
+        $arraysign[] = '';                  /*If-Unmodified-Since*/  
+        $arraysign[] = '';                  /*Range*/  
+        $arraysign[] = $headerResource;     /*CanonicalizedHeaders*/
+        $arraysign[] = $urlResource;        /*CanonicalizedResource*/
+    
+        $str2sign = implode("\n", $arraysign);
+    
+        $sig = base64_encode(hash_hmac('sha256', urldecode(utf8_encode($str2sign)), base64_decode($accesskey), true));  
+        $authHeader = "SharedKey $storageAccount:$sig";
+    
+        $headers = [
+            'Authorization: ' . $authHeader,
+            'x-ms-blob-cache-control: max-age=3600',
+            'x-ms-blob-type: BlockBlob',
+            'x-ms-date: ' . $currentDate,
+            'x-ms-version: 2015-12-11',
+            'Content-Type: image/png',
+            'Content-Length: ' . $fileLen
+        ];
+    
+        $ch = curl_init($destinationURL);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "PUT");
+        curl_setopt($ch, CURLOPT_INFILE, $handle); 
+        curl_setopt($ch, CURLOPT_INFILESIZE, $fileLen); 
+        curl_setopt($ch, CURLOPT_UPLOAD, true); 
+        $result = curl_exec($ch);
+    
+        echo ('Result<br/>');
+        print_r($result);
+    
+        echo ('Error<br/>');
+        print_r(curl_error($ch));
+    
+        curl_close($ch);
+    }
+
+    //https://stackoverflow.com/questions/59987142/azure-file-storage-using-php
+    // function storePDFTOAzureStorage() {
+    //     $accountName = "<your account name>";
+    //     $accountKey = "<your account key>";
+
+    //     $shareName = "<your share name>";
+    //     $fileName = "<your pdf file name>";
+
+    //     $now = date(DATE_ISO8601);
+    //     $date = date_create($now);
+    //     date_add($date, date_interval_create_from_date_string("1 hour"));
+    //     $expiry = str_replace("+0000", "Z", date_format($date, DATE_ISO8601));
+
+    //     $helper = new FileSharedAccessSignatureHelper($accountName, $accountKey);
+    //     $sas = $helper->generateFileServiceSharedAccessSignatureToken(
+    //             Resources::RESOURCE_TYPE_FILE,
+    //             "$shareName/$fileName",
+    //             'r',                        // Read
+    //             $expiry // A valid ISO 8601 format expiry time， such as '2020-01-01T08:30:00Z' 
+    //         );
+    //     $fileUrlWithSAS = "https://$accountName.file.core.windows.net/$shareName/$fileName?$sas";
+    //     echo "<h1>Demo to display PDF from Azure File Storage</h1>";
+    //     echo "<iframe src='$fileUrlWithSAS'  width='800' height='500' allowfullscreen webkitallowfullscreen></iframe>";
+    // }
 
     function xml_attribute($object, $attribute)
     {
