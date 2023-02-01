@@ -343,7 +343,8 @@
             // $contentType = "application/pdf";
             $contentType = 'text/plain';
             $name = 'PDF';
-            $pdf->Output(__DIR__ . '/../outputpdfs/svgtopdf.pdf', "F");    // send the file in
+            $currentDate = gmdate("D, d M Y H:i:s T", time());
+            $pdf->Output(__DIR__ . '/../outputpdfs/pdf'.$currentDate.'pdf', "F");    // send the file in
 
             $accesskey = "/1trovN9uvAh0Cvziv/GTgI9V/P/IQJg0BANb9W8beMtTd2KtwnMkpQd4eDz1JTltNoDsl/QdZLj+AStS1RcDg==";
             $storageAccount = 'papdfgen';
