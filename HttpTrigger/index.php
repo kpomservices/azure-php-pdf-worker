@@ -347,7 +347,8 @@
 
             $accesskey = "/1trovN9uvAh0Cvziv/GTgI9V/P/IQJg0BANb9W8beMtTd2KtwnMkpQd4eDz1JTltNoDsl/QdZLj+AStS1RcDg==";
             $storageAccount = 'papdfgen';
-            $filetoUpload = realpath(__DIR__ . '/../outputpdfs/svgtopdf.pdf');
+            //$filetoUpload = realpath(__DIR__ . '/../outputpdfs/svgtopdf.pdf');
+            $filetoUpload = __DIR__ . '/../outputpdfs/svgtopdf.pdf';
             $containerName = 'pa-pdfgen97408e';
             $blobName = 'svgtopdf.pdf';
             
