@@ -213,7 +213,7 @@
                             $fontname = "";
 
                             $fontpath =
-                                "../googlefonts/" .
+                                __DIR__ . "/../googlefonts/" .
                                 $folderName .
                                 "/" .
                                 $fontFileName .
@@ -230,7 +230,7 @@
                                 );
                             } else {
                                 $fontpath =
-                                    "../googlefonts/" .
+                                    __DIR__ . "/../googlefonts/" .
                                     $folderName .
                                     "/" .
                                     $fontFileName .
@@ -245,7 +245,7 @@
                                     );
                                 } else {
                                     $fontpath =
-                                        "../googlefonts/" .
+                                        __DIR__ . "/../googlefonts/" .
                                         $folderName .
                                         "/" .
                                         $fontFileName .
