@@ -354,7 +354,7 @@
             
             $destinationURL = "https://$storageAccount.blob.core.windows.net/$containerName/$blobName";
             
-            // uploadBlob($filetoUpload, $storageAccount, $containerName, $blobName, $destinationURL, $accesskey);
+            uploadBlob($filetoUpload, $storageAccount, $containerName, $blobName, $destinationURL, $accesskey);
 
             $message = $destinationURL;
             //$message = $pdf->Output('svgtopdf.pdf', "E");    // send the file in
