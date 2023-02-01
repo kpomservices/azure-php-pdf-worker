@@ -344,10 +344,11 @@
 
             $pdf->Close();
 
-            $contentType = "application/pdf";
+            // $contentType = "application/pdf";
+            $contentType = 'text/plain';
             $name = 'PDF';
-            $message = $pdf->Output('svgtopdf.pdf', "E");    // send the file in
-
+            // $message = $pdf->Output('svgtopdf.pdf', "E");    // send the file in
+            $message = "svgtopdf.pdf";
             // function Hex2RGB($color)
             // {
             //     $color = str_replace("#", "", $color);
