@@ -343,7 +343,7 @@
             // $contentType = "application/pdf";
             $contentType = 'text/plain';
             $name = 'PDF';
-            $message = $pdf->Output(__DIR__ . '/../outputpdfs/svgtopdf.pdf', "F");    // send the file in
+            $pdf->Output(__DIR__ . '/../outputpdfs/svgtopdf.pdf', "F");    // send the file in
 
             $accesskey = "/1trovN9uvAh0Cvziv/GTgI9V/P/IQJg0BANb9W8beMtTd2KtwnMkpQd4eDz1JTltNoDsl/QdZLj+AStS1RcDg==";
             $storageAccount = 'papdfgen';
@@ -353,8 +353,9 @@
             
             $destinationURL = "https://$storageAccount.blob.core.windows.net/$containerName/$blobName";
             
-            uploadBlob($filetoUpload, $storageAccount, $containerName, $blobName, $destinationURL, $accesskey);
+            // uploadBlob($filetoUpload, $storageAccount, $containerName, $blobName, $destinationURL, $accesskey);
 
+            $message = $destinationURL;
             //$message = $pdf->Output('svgtopdf.pdf', "E");    // send the file in
         } else {
             $contentType = "text/plain";
@@ -372,7 +373,7 @@
             ]
         ];
     }
-    
+
     //https://stackoverflow.com/questions/41682393/simple-php-curl-file-upload-to-azure-storage-blob
     function uploadBlob($filetoUpload, $storageAccount, $containerName, $blobName, $destinationURL, $accesskey) {
 
@@ -425,11 +426,11 @@
         curl_setopt($ch, CURLOPT_UPLOAD, true); 
         $result = curl_exec($ch);
     
-        echo ('Result<br/>');
-        print_r($result);
+        // echo ('Result<br/>');
+        // print_r($result);
     
-        echo ('Error<br/>');
-        print_r(curl_error($ch));
+        // echo ('Error<br/>');
+        // print_r(curl_error($ch));
     
         curl_close($ch);
     }
