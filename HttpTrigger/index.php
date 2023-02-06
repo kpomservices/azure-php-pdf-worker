@@ -18,12 +18,10 @@
             //$cwidth = 750;
             //$cheight = 600;            
             $jsonData = $body->jsonData;
-            // $cwidth = $query['cwidth'];
-            // $cheight = $query["cheight"];
+            $cwidth = $body->cwidth;
+            $cheight = $body->cheight;
             // $canvasScale = $query["scale"];
             // $jsonData = "Hello World";
-            $cwidth = 5*96;
-            $cheight = 7*96;
             $savecrop = 'false';
             $rows = 1;
             $cols = 1;
