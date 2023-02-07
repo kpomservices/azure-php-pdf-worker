@@ -14,14 +14,11 @@
         $body = json_decode($body); 
        
         if (isset($body->svg)) {
-            
-            //$cwidth = 750;
-            //$cheight = 600;            
+                       
             $jsonData = $body->jsonData;
             $cwidth = $body->cwidth;
             $cheight = $body->cheight;
             // $canvasScale = $query["scale"];
-            // $jsonData = "Hello World";
             $savecrop = 'false';
             $rows = 1;
             $cols = 1;
