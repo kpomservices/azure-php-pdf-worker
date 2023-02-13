@@ -187,7 +187,7 @@
                         if ($fontFamily != "" && strlen($fontFamily) > 0) {
                             //$folderName = str_replace(" ","_", $fontFamily);
 
-                            $folderName = $fontFamily;
+                            $folderName = strtolower(str_replace(" ", "", $fontFamily));
 
                             $fontFileName = str_replace(" ", "", $fontFamily);
 
