@@ -185,7 +185,6 @@
                         $textDecoration = $localFont->textDecoration;
 
                         if ($fontFamily != "" && strlen($fontFamily) > 0) {
-                            //$folderName = str_replace(" ","_", $fontFamily);
 
                             $folderName = strtolower(str_replace(" ", "", $fontFamily));
 
