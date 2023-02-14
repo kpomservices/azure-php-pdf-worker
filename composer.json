@@ -6,5 +6,8 @@
     "require": {
         "videlalvaro/azserverless": "*",
         "tecnickcom/tcpdf": "^6.2.13"
+    },
+    "config": {
+      "process-timeout":0
     }
 }
