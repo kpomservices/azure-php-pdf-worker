@@ -19,11 +19,20 @@
         if (isset($body->image)) {
                        
             $imageData = $body->imageData;
-            $imagefilename = $body->imagefilename;            
+            $imagefilename = $body->imagefilename;    
+            
+            $uploadpath   = './../tempimages/';
+            $parts        = explode(";base64,", $imageData);
+            $imageparts   = explode("image/", @$parts[0]);
+            $imagetype    = $imageparts[1];
+            $imagebase64  = base64_decode($parts[1]);
+            $imagefilename = uniqid() . '.png';
+            $filetoUpload = $uploadpath . $imagefilename;
+            file_put_contents($filetoUpload, $imagebase64);        
 
-            file_put_contents(__DIR__ . '/../tempimages/'.$imagefilename, file_get_contents($imageData));
+            // file_put_contents(__DIR__ . '/../tempimages/'.$imagefilename, file_get_contents($imageData));
+            // $filetoUpload = __DIR__ . '/../tempimages/'.$imagefilename;
 
-            $filetoUpload = __DIR__ . '/../tempimages/'.$imagefilename;
             $containerName = 'objectimages';
             $blobName = $imagefilename;
             
