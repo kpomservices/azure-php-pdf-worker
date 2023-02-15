@@ -11,9 +11,30 @@
         $query = $req['Query'];//request parameters        
         $body = $req['Body']; //post body paramters
                
-        $body = json_decode($body); 
-       
-        if (isset($body->svg)) {
+        $body = json_decode($body);
+
+        if (isset($body->image)) {
+                       
+            $imageData = $body->imageData;
+            $imagefilename = $body->imagefilename;            
+
+            file_put_contents(__DIR__ . '/../tempimages/'.$imagefilename, $imageData);
+
+            $accesskey = "/1trovN9uvAh0Cvziv/GTgI9V/P/IQJg0BANb9W8beMtTd2KtwnMkpQd4eDz1JTltNoDsl/QdZLj+AStS1RcDg==";
+            
+            $storageAccount = 'papdfgen';
+            $filetoUpload = __DIR__ . '/../tempimages/'.$imagefilename;
+            $containerName = 'objectimages';
+            $blobName = $imagefilename;
+            
+            $destinationURL = "https://$storageAccount.blob.core.windows.net/$containerName/$blobName";
+            
+            uploadBlob($filetoUpload, $storageAccount, $containerName, $blobName, $destinationURL, $accesskey);
+            
+            unlink($filetoUpload);
+            
+            $message = $destinationURL;
+        } else if (isset($body->svg)) {
                        
             $jsonData = $body->jsonData;
             $cwidth = $body->cwidth;
