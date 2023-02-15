@@ -4,6 +4,9 @@
 
     function run(FunctionContext $context) {
 
+        $accesskey = "/1trovN9uvAh0Cvziv/GTgI9V/P/IQJg0BANb9W8beMtTd2KtwnMkpQd4eDz1JTltNoDsl/QdZLj+AStS1RcDg==";            
+        $storageAccount = 'papdfgen';
+
         $req = $context->inputs['req'];
 
         $context->log->info('Http trigger invoked');
@@ -20,9 +23,6 @@
 
             file_put_contents(__DIR__ . '/../tempimages/'.$imagefilename, $imageData);
 
-            $accesskey = "/1trovN9uvAh0Cvziv/GTgI9V/P/IQJg0BANb9W8beMtTd2KtwnMkpQd4eDz1JTltNoDsl/QdZLj+AStS1RcDg==";
-            
-            $storageAccount = 'papdfgen';
             $filetoUpload = __DIR__ . '/../tempimages/'.$imagefilename;
             $containerName = 'objectimages';
             $blobName = $imagefilename;
@@ -361,8 +361,6 @@
             $name = 'PDF';
             $pdf->Output(__DIR__ . '/../outputpdfs/'.$pdffilename, "F");    // send the file in
 
-            $accesskey = "/1trovN9uvAh0Cvziv/GTgI9V/P/IQJg0BANb9W8beMtTd2KtwnMkpQd4eDz1JTltNoDsl/QdZLj+AStS1RcDg==";
-            $storageAccount = 'papdfgen';
             $filetoUpload = __DIR__ . '/../outputpdfs/'.$pdffilename;
             $containerName = 'outputpdfs';
             $blobName = $pdffilename;
