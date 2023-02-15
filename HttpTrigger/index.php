@@ -21,33 +21,31 @@
             $imageData = $body->imageData;
             $imagefilename = $body->imagefilename;    
             
-            // $uploadpath   = './../tempimages/';
-            // $parts        = explode(";base64,", $imageData);
-            // $imageparts   = explode("image/", @$parts[0]);
-            // $imagetype    = $imageparts[1];
-            // $imagebase64  = base64_decode($parts[1]);
-            // $imagefilename = uniqid() . '.png';
-            // $filetoUpload = $uploadpath . $imagefilename;
-            // file_put_contents($filetoUpload, $imagebase64);        
+            $uploadpath   = './../tempimages/';
+            $parts        = explode(";base64,", $imageData);
+            $imageparts   = explode("image/", @$parts[0]);
+            $imagetype    = $imageparts[1];
+            $imagebase64  = base64_decode($parts[1]);
+            $imagefilename = uniqid() . '.png';
+            $filetoUpload = $uploadpath . $imagefilename;
+            file_put_contents($filetoUpload, $imagebase64);        
 
-            // // file_put_contents(__DIR__ . '/../tempimages/'.$imagefilename, file_get_contents($imageData));
-            // // $filetoUpload = __DIR__ . '/../tempimages/'.$imagefilename;
+            // file_put_contents(__DIR__ . '/../tempimages/'.$imagefilename, file_get_contents($imageData));
+            // $filetoUpload = __DIR__ . '/../tempimages/'.$imagefilename;
 
-            // $containerName = 'objectimages';
-            // $blobName = $imagefilename;
+            $containerName = 'objectimages';
+            $blobName = $imagefilename;
             
-            // $destinationURL = "https://$storageAccount.blob.core.windows.net/$containerName/$blobName";
+            $destinationURL = "https://$storageAccount.blob.core.windows.net/$containerName/$blobName";
             
-            // uploadBlob($filetoUpload, $storageAccount, $containerName, $blobName, $destinationURL, $accesskey);
+            uploadBlob($filetoUpload, $storageAccount, $containerName, $blobName, $destinationURL, $accesskey);
             
-            // unlink($filetoUpload);
-            
-            // $message = $destinationURL;
-            
-            // $message = $destinationURL;
+            unlink($filetoUpload);
+
             $contentType = "text/plain";
             $name = 'Image';
-            $message = $imagefilename;
+            
+            $message = $destinationURL;
         } else if (isset($body->svg)) {
                        
             $jsonData = $body->jsonData;
