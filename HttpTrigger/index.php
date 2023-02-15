@@ -45,6 +45,8 @@
             // $message = $destinationURL;
             
             // $message = $destinationURL;
+            $contentType = "text/plain";
+            $name = 'Image';
             $message = $imagefilename;
         } else if (isset($body->svg)) {
                        
