@@ -26,7 +26,7 @@
             $imageparts   = explode("image/", @$parts[0]);
             $imagetype    = $imageparts[1];
             $imagebase64  = base64_decode($parts[1]);
-            $imagefilename = uniqid() . '.png';
+            // $imagefilename = uniqid() . '.png';
             $filetoUpload = $uploadpath . $imagefilename;
             file_put_contents($filetoUpload, $imagebase64);        
 
