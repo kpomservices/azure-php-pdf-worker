@@ -21,7 +21,7 @@
             $imageData = $body->imageData;
             $imagefilename = $body->imagefilename;            
 
-            file_put_contents(__DIR__ . '/../tempimages/'.$imagefilename, $imageData);
+            file_put_contents(__DIR__ . '/../tempimages/'.$imagefilename, file_get_contents($imageData));
 
             $filetoUpload = __DIR__ . '/../tempimages/'.$imagefilename;
             $containerName = 'objectimages';
