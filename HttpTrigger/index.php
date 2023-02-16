@@ -21,7 +21,12 @@
             $imageData = $body->imageData;
             $imagefilename = $body->imagefilename;
 
-            $imagefilename = uniqid() . '.jpg';
+            //$image_info = getimagesize($imageData);            
+            //$extension = (isset($image_info["mime"]) ? explode('/', $image_info["mime"] )[1]: "png");
+            
+            $extension = explode('/', mime_content_type($imageData))[1];            
+            $imagefilename = uniqid() . '.' . $extension;
+
             file_put_contents(__DIR__ . '/../tempimages/'.$imagefilename, file_get_contents($imageData));
             $filetoUpload = __DIR__ . '/../tempimages/'.$imagefilename;
 
