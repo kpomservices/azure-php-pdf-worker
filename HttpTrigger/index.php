@@ -159,6 +159,7 @@
                     $pdf->StartTransform();
 
                     // Set Clipping Mask
+
                     $pdf->Rect(
                         $offsetwidth,
                         $offsetheight,
@@ -166,9 +167,6 @@
                         $offsetheight,
                         "CNZ"
                     );
-
-                    // Set Clipping Mask
-                    // $pdf->Rect ( 50, 50, 100,200,'CNZ');
 
                     //Return attribute font name
 
