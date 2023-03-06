@@ -22,8 +22,8 @@
             $imageData = $body->imageData;
             $imagefilename = $body->imagefilename;
 
-            //$image_info = getimagesize($imageData);            
-            //$extension = (isset($image_info["mime"]) ? explode('/', $image_info["mime"] )[1]: "png");
+            $image_info = getimagesize($imageData);            
+            $extension = (isset($image_info["mime"]) ? explode('/', $image_info["mime"] )[1]: "png");
             
             $extension = explode('/', mime_content_type($imageData))[1];            
             $imagefilename = uniqid() . '.' . $extension;
