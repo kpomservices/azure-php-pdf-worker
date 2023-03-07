@@ -125,7 +125,7 @@
             for ($x = 0; $x < $totalcanvas; $x += $rc) {
                 $pdf->AddPage();
 
-                // $pdf->StartTransform();
+                $pdf->StartTransform();
 
                 $colscount = 0;
 
@@ -361,7 +361,7 @@
                     $colscount++;
                 }
 
-                // $pdf->StopTransform();
+                $pdf->StopTransform();
             }
 
             $pdf->Close();
