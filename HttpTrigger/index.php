@@ -3,7 +3,7 @@
     use Azserverless\Context\FunctionContext;
 
     function run(FunctionContext $context) {
-        ini_set('max_execution_time', '300'); //300 seconds = 5 minutes
+        //ini_set('max_execution_time', '300'); //300 seconds = 5 minutes
 
         $accesskey = "/1trovN9uvAh0Cvziv/GTgI9V/P/IQJg0BANb9W8beMtTd2KtwnMkpQd4eDz1JTltNoDsl/QdZLj+AStS1RcDg==";            
         $storageAccount = 'papdfgen';
