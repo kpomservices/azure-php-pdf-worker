@@ -125,7 +125,7 @@
             for ($x = 0; $x < $totalcanvas; $x += $rc) {
                 $pdf->AddPage();
 
-                $pdf->StartTransform();
+                // $pdf->StartTransform();
 
                 $colscount = 0;
 
@@ -150,13 +150,13 @@
 
                     // start a new XObject Template and set transparency group option
 
-                    $template_id = $pdf->startTemplate(
-                        $offsetwidth * 2,
-                        $offsetheight * 2,
-                        true
-                    );
+                    // $template_id = $pdf->startTemplate(
+                    //     $offsetwidth * 2,
+                    //     $offsetheight * 2,
+                    //     true
+                    // );
 
-                    $pdf->StartTransform();
+                    // $pdf->StartTransform();
 
                     // Set Clipping Mask
 
@@ -296,64 +296,64 @@
                         }
                     }
 
-                    $pdf->setXY($offsetwidth, $offsetheight);
+                    // $pdf->setXY($offsetwidth, $offsetheight);
 
                     $pdf->ScaleXY(($scalef / $canvasScale) * 100);
                     $pdf->ImageSVG("@" . $dataString);
 
-                    $pdf->StopTransform();
+                    // $pdf->StopTransform();
 
                     // end the current Template
 
-                    $pdf->endTemplate();
+                    // $pdf->endTemplate();
 
-                    $pdf->printTemplate(
-                        $template_id,
-                        $offsetwidth * $colscount - $offsetwidth + $cmp,
-                        $offsetheight * $rowscount - $offsetheight + $cmp,
-                        $offsetwidth * 2,
-                        $offsetheight * 2,
-                        "",
-                        "",
-                        false
-                    );
+                    // $pdf->printTemplate(
+                    //     $template_id,
+                    //     $offsetwidth * $colscount - $offsetwidth + $cmp,
+                    //     $offsetheight * $rowscount - $offsetheight + $cmp,
+                    //     $offsetwidth * 2,
+                    //     $offsetheight * 2,
+                    //     "",
+                    //     "",
+                    //     false
+                    // );
 
                     if ($savecrop != "false") {
-                        $pdf->cropMark(
-                            $offsetwidth * $colscount + $cmp,
-                            $offsetheight * $rowscount + $cmp,
-                            $cmp,
-                            $cmp,
-                            "TL",
-                            [136, 136, 136]
-                        );
+                        // $pdf->cropMark(
+                        //     $offsetwidth * $colscount + $cmp,
+                        //     $offsetheight * $rowscount + $cmp,
+                        //     $cmp,
+                        //     $cmp,
+                        //     "TL",
+                        //     [136, 136, 136]
+                        // );
 
-                        $pdf->cropMark(
-                            $offsetwidth * $colscount + $offsetwidth + $cmp,
-                            $offsetheight * $rowscount + $cmp,
-                            $cmp,
-                            $cmp,
-                            "TR",
-                            [136, 136, 136]
-                        );
+                        // $pdf->cropMark(
+                        //     $offsetwidth * $colscount + $offsetwidth + $cmp,
+                        //     $offsetheight * $rowscount + $cmp,
+                        //     $cmp,
+                        //     $cmp,
+                        //     "TR",
+                        //     [136, 136, 136]
+                        // );
 
-                        $pdf->cropMark(
-                            $offsetwidth * $colscount + $cmp,
-                            $offsetheight * $rowscount + $offsetheight + $cmp,
-                            $cmp,
-                            $cmp,
-                            "BL",
-                            [136, 136, 136]
-                        );
+                        // $pdf->cropMark(
+                        //     $offsetwidth * $colscount + $cmp,
+                        //     $offsetheight * $rowscount + $offsetheight + $cmp,
+                        //     $cmp,
+                        //     $cmp,
+                        //     "BL",
+                        //     [136, 136, 136]
+                        // );
 
-                        $pdf->cropMark(
-                            $offsetwidth * $colscount + $offsetwidth + $cmp,
-                            $offsetheight * $rowscount + $offsetheight + $cmp,
-                            $cmp,
-                            $cmp,
-                            "BR",
-                            [136, 136, 136]
-                        );
+                        // $pdf->cropMark(
+                        //     $offsetwidth * $colscount + $offsetwidth + $cmp,
+                        //     $offsetheight * $rowscount + $offsetheight + $cmp,
+                        //     $cmp,
+                        //     $cmp,
+                        //     "BR",
+                        //     [136, 136, 136]
+                        // );
                     }
 
                     //$pdf->printTemplate($template_id, ($offsetwidth * $colscount), ($offsetheight * $rowscount), $offsetwidth, $offsetheight, '', '', false);
@@ -361,7 +361,7 @@
                     $colscount++;
                 }
 
-                $pdf->StopTransform();
+                // $pdf->StopTransform();
             }
 
             $pdf->Close();
