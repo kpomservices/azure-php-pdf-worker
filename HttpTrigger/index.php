@@ -150,23 +150,23 @@
 
                     // start a new XObject Template and set transparency group option
 
-                    // $template_id = $pdf->startTemplate(
-                    //     $offsetwidth * 2,
-                    //     $offsetheight * 2,
-                    //     true
-                    // );
+                    $template_id = $pdf->startTemplate(
+                        $offsetwidth * 2,
+                        $offsetheight * 2,
+                        true
+                    );
 
-                    // $pdf->StartTransform();
+                    $pdf->StartTransform();
 
                     // Set Clipping Mask
 
-                    // $pdf->Rect(
-                    //     $offsetwidth,
-                    //     $offsetheight,
-                    //     $offsetwidth,
-                    //     $offsetheight,
-                    //     "CNZ"
-                    // );
+                    $pdf->Rect(
+                        $offsetwidth,
+                        $offsetheight,
+                        $offsetwidth,
+                        $offsetheight,
+                        "CNZ"
+                    );
 
                     //Return attribute font name
 
@@ -301,22 +301,22 @@
                     $pdf->ScaleXY(($scalef / $canvasScale) * 100);
                     $pdf->ImageSVG("@" . $dataString);
 
-                    // $pdf->StopTransform();
+                    $pdf->StopTransform();
 
                     // end the current Template
 
-                    // $pdf->endTemplate();
+                    $pdf->endTemplate();
 
-                    // $pdf->printTemplate(
-                    //     $template_id,
-                    //     $offsetwidth * $colscount - $offsetwidth + $cmp,
-                    //     $offsetheight * $rowscount - $offsetheight + $cmp,
-                    //     $offsetwidth * 2,
-                    //     $offsetheight * 2,
-                    //     "",
-                    //     "",
-                    //     false
-                    // );
+                    $pdf->printTemplate(
+                        $template_id,
+                        $offsetwidth * $colscount - $offsetwidth + $cmp,
+                        $offsetheight * $rowscount - $offsetheight + $cmp,
+                        $offsetwidth * 2,
+                        $offsetheight * 2,
+                        "",
+                        "",
+                        false
+                    );
 
                     if ($savecrop != "false") {
                         $pdf->cropMark(
