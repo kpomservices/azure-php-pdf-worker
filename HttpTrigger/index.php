@@ -284,25 +284,25 @@
 
                     $pdf->ScaleXY(($scalef / $canvasScale) * 100);
 
-                    // $pdf->SetXY(0, 0);
+                    $pdf->SetXY(0, 0);
         
-                    // $pdf->Image('https://papdfgen.blob.core.windows.net/objectimages/64086809f1532.png', -150, 10, 700, '', '', '', 'T', false, 300, '', false, false, 0, false, false, false);
+                    $pdf->Image('https://papdfgen.blob.core.windows.net/objectimages/64086809f1532.png', 150, 10, 700, 400, '', '', 'T', false, 300, '', false, false, 0, false, false, false);
             
-                    // $pdf->StartTransform();
-                    // // Set Clipping Mask
-                    // $pdf->Rect(
-                    //     150,
-                    //     150,
-                    //     100,
-                    //     100,
-                    //     "CNZ"
-                    // );
+                    $pdf->StartTransform();
+                    // Set Clipping Mask
+                    $pdf->Rect(
+                        150,
+                        150,
+                        100,
+                        100,
+                        "CNZ"
+                    );
                     
-                    // $pdf->setXY(150, 150);
+                    $pdf->setXY(150, 150);
             
                     $pdf->ImageSVG("@" . $dataString);
             
-                    // $pdf->StopTransform();
+                    $pdf->StopTransform();
             
                     if ($savecrop != "false") {
                         // $pdf->cropMark(
