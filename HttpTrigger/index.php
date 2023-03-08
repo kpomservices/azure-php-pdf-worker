@@ -285,11 +285,10 @@
 
                     $pdf->ScaleXY(($scalef / $canvasScale) * 100);
 
-                    $pdf->SetXY(100, 0);
+                    $pdf->SetXY(0, 0);
         
-                    //$pdf->Image('https://papdfgen.blob.core.windows.net/objectimages/64086809f1532.png', 150, 10, 700, 400, '', '', 'T', false, 300, '', false, false, 0, false, false, false);
-                    $pdf->ImageSVG("@" . $dataString);
-
+                    $pdf->Image('https://papdfgen.blob.core.windows.net/objectimages/64089c91ab7ab.jpeg', 150, 10, 700, 400, '', '', 'T', false, 300, '', false, false, 0, false, false, false);
+            
                     $pdf->StartTransform();
                     // Set Clipping Mask
                     $pdf->Rect(
