@@ -3,7 +3,7 @@
     use Azserverless\Context\FunctionContext;
 
     function run(FunctionContext $context) {
-        //ini_set('max_execution_time', '300'); //300 seconds = 5 minutes
+        ini_set('max_execution_time', '600'); //300 seconds = 5 minutes
 
         $accesskey = "/1trovN9uvAh0Cvziv/GTgI9V/P/IQJg0BANb9W8beMtTd2KtwnMkpQd4eDz1JTltNoDsl/QdZLj+AStS1RcDg==";            
         $storageAccount = 'papdfgen';
@@ -286,7 +286,7 @@
 
                     $pdf->SetXY(0, 0);
         
-                    $pdf->Image('https://papdfgen.blob.core.windows.net/objectimages/640867f8d0d9d.png', -150, 10, 700, '', '', '', 'T', false, 300, '', false, false, 1, false, false, false);
+                    $pdf->Image('https://papdfgen.blob.core.windows.net/objectimages/64086809f1532.png', -150, 10, 700, '', '', '', 'T', false, 300, '', false, false, 1, false, false, false);
             
                     $pdf->StartTransform();
                     // Set Clipping Mask
