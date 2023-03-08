@@ -22,9 +22,6 @@
             $imageData = $body->imageData;
             $imagefilename = $body->imagefilename;
 
-            //$image_info = getimagesize($imageData);            
-            //$extension = (isset($image_info["mime"]) ? explode('/', $image_info["mime"] )[1]: "png");
-            
             $extension = explode('/', mime_content_type($imageData))[1];            
             $imagefilename = uniqid() . '.' . $extension;
 
@@ -50,7 +47,6 @@
             $cwidth = $body->cwidth;
             $cheight = $body->cheight;
             $pdffilename = $body->pdffilename;
-            // $canvasScale = $query["scale"];
             $savecrop = 'false';
             $rows = 1;
             $cols = 1;
@@ -125,8 +121,6 @@
             for ($x = 0; $x < $totalcanvas; $x += $rc) {
                 $pdf->AddPage();
 
-                // $pdf->StartTransform();
-
                 $colscount = 0;
 
                 $rowscount = 0;
@@ -147,16 +141,6 @@
 
                         $rowscount++;
                     }
-
-                    // start a new XObject Template and set transparency group option
-
-                    // $template_id = $pdf->startTemplate(
-                    //     $offsetwidth * 2,
-                    //     $offsetheight * 2,
-                    //     true
-                    // );
-
-                    // $pdf->StartTransform();
 
                     // Set Clipping Mask
 
@@ -301,23 +285,6 @@
                     $pdf->ScaleXY(($scalef / $canvasScale) * 100);
                     $pdf->ImageSVG("@" . $dataString);
 
-                    // $pdf->StopTransform();
-
-                    // end the current Template
-
-                    // $pdf->endTemplate();
-
-                    // $pdf->printTemplate(
-                    //     $template_id,
-                    //     $offsetwidth * $colscount - $offsetwidth + $cmp,
-                    //     $offsetheight * $rowscount - $offsetheight + $cmp,
-                    //     $offsetwidth * 2,
-                    //     $offsetheight * 2,
-                    //     "",
-                    //     "",
-                    //     false
-                    // );
-
                     if ($savecrop != "false") {
                         // $pdf->cropMark(
                         //     $offsetwidth * $colscount + $cmp,
@@ -356,12 +323,8 @@
                         // );
                     }
 
-                    //$pdf->printTemplate($template_id, ($offsetwidth * $colscount), ($offsetheight * $rowscount), $offsetwidth, $offsetheight, '', '', false);
-
                     $colscount++;
                 }
-
-                // $pdf->StopTransform();
             }
 
             $pdf->Close();
