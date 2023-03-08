@@ -2,11 +2,10 @@
     require __DIR__ . '/../vendor/autoload.php';
     use Azserverless\Context\FunctionContext;
 
-    function run(FunctionContext $context) {        
+    function run(FunctionContext $context) {
+
         ini_set('max_execution_time', '600'); //300 seconds = 5 minutes
-        error_reporting(E_ALL);
-        ini_set('display_errors', '1');
-        
+
         $accesskey = "/1trovN9uvAh0Cvziv/GTgI9V/P/IQJg0BANb9W8beMtTd2KtwnMkpQd4eDz1JTltNoDsl/QdZLj+AStS1RcDg==";            
         $storageAccount = 'papdfgen';
 
