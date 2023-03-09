@@ -5,7 +5,7 @@
     function run(FunctionContext $context) {
 
         ini_set('max_execution_time', '1200'); //300 seconds = 5 minutes
-        ini_set('memory_limit', '512MB');
+        // ini_set('memory_limit', '512MB');
 
         $accesskey = "/1trovN9uvAh0Cvziv/GTgI9V/P/IQJg0BANb9W8beMtTd2KtwnMkpQd4eDz1JTltNoDsl/QdZLj+AStS1RcDg==";            
         $storageAccount = 'papdfgen';
@@ -305,10 +305,8 @@
 
                     $pdf->SetXY(0, 0);
         
-                    $out = $pdf->Image('https://papdfgen.blob.core.windows.net/objectimages/640886be6d6f2.png', 150, 10, 700, 400, '', '', 'T', false, 300, '', false, false, 0, false, false, true);
+                    $pdf->Image('https://papdfgen.blob.core.windows.net/objectimages/640886be6d6f2.png', 150, 10, 700, 400, '', '', 'T', false, 300, '', false, false, 0, false, false, true);
             
-                    $message .= $out;
-                    
                     $pdf->StartTransform();
                     // Set Clipping Mask
                     $pdf->Rect(
@@ -396,7 +394,7 @@
             // fclose($fh);
             // unlink($filetoUpload);
             
-            $message .= $destinationURL;
+            $message = $destinationURL;
             //$message = $pdf->Output('svgtopdf.pdf', "E");    // send the file in
         } else {
             $contentType = "text/plain";
