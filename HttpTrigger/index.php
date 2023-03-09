@@ -396,7 +396,7 @@
             // fclose($fh);
             // unlink($filetoUpload);
             
-            $message = "Test" . $img;
+            $message = $destinationURL;
             //$message = $pdf->Output('svgtopdf.pdf', "E");    // send the file in
         } else {
             $contentType = "text/plain";
