@@ -26,7 +26,7 @@
             $extension = explode('/', mime_content_type($imageData))[1];            
             $imagefilename = uniqid() . '.' . $extension;
             
-            // $imageData = file_get_contents($imageData);
+            $imageData = file_get_contents($imageData);
 
             $fh = tmpfile(); //Get temporary filehandle
             fwrite($fh, $imageData); //Write the string to the temporary file
