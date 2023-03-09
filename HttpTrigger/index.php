@@ -4,8 +4,8 @@
 
     function run(FunctionContext $context) {
 
-        ini_set('max_execution_time', '600'); //300 seconds = 5 minutes
-        // ini_set('memory_limit', '512MB');
+        ini_set('max_execution_time', '1200'); //300 seconds = 5 minutes
+        ini_set('memory_limit', '512MB');
 
         $accesskey = "/1trovN9uvAh0Cvziv/GTgI9V/P/IQJg0BANb9W8beMtTd2KtwnMkpQd4eDz1JTltNoDsl/QdZLj+AStS1RcDg==";            
         $storageAccount = 'papdfgen';
