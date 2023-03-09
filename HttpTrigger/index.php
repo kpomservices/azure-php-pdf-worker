@@ -53,7 +53,7 @@
             
             uploadBlob($fh, $fs, $storageAccount, $containerName, $blobName, $destinationURL, $accesskey);
             
-            // unlink($filetoUpload);
+            // unlink($fh);
             fclose($fh);
 
             $contentType = "text/plain";
@@ -371,15 +371,18 @@
             $contentType = 'text/plain';
             $name = 'PDF';
 
-            $pdfoutput = $pdf->Output(__DIR__ . '/../outputpdfs/'.$pdffilename, "S");    // send the file in
+            // $pdfoutput = $pdf->Output(__DIR__ . '/../outputpdfs/'.$pdffilename, "S");    // send the file in
 
-            //$pdf->Output(__DIR__ . '/../outputpdfs/'.$pdffilename, "F");    // send the file in
-            // $fh = __DIR__ . '/../outputpdfs/'.$pdffilename;
-                       
-            $fh = tmpfile(); //Get temporary filehandle
-            fwrite($fh, $pdfoutput); //Write the string to the temporary file
-            fseek($fh, 0); //Put filepointer to the beginning of the temporary file
-            $fs = strlen($pdfoutput);
+            $pdf->Output(__DIR__ . '/../outputpdfs/'.$pdffilename, "F");    // send the file in
+            $fh = __DIR__ . '/../outputpdfs/'.$pdffilename;
+            
+            $fh = fopen($fh, "r");
+            $fs = filesize($fh);
+           
+            // $fh = tmpfile(); //Get temporary filehandle
+            // fwrite($fh, $pdfoutput); //Write the string to the temporary file
+            // fseek($fh, 0); //Put filepointer to the beginning of the temporary file
+            // $fs = strlen($pdfoutput);
 
             $containerName = 'outputpdfs';
             $blobName = $pdffilename;
@@ -388,7 +391,8 @@
             
             uploadBlob($fh, $fs, $storageAccount, $containerName, $blobName, $destinationURL, $accesskey);
             
-            fclose($fh);
+            // fclose($fh);
+            unlink($fh);
             
             $message = $destinationURL;
             //$message = $pdf->Output('svgtopdf.pdf', "E");    // send the file in
