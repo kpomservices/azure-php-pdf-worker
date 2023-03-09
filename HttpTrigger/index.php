@@ -20,8 +20,11 @@
         
         if (isset($body->info)) {
             $contentType = "text/plain";
-            $name = 'Info';            
-            $message = phpinfo();
+            $name = 'Info';      
+            ob_start();
+            phpinfo();
+            $message = ob_get_contents();
+            ob_get_clean();
         } else if (isset($body->image)) {
                        
             $imageData = $body->imageData;
