@@ -25,18 +25,24 @@
 
             $extension = explode('/', mime_content_type($imageData))[1];            
             $imagefilename = uniqid() . '.' . $extension;
+            
+            $fh = fopen('php://memory','rw');
+            fwrite( $fh, $imageData);
+            rewind($fh);
+            
+            $fs = strlen($imageData);
 
-            file_put_contents(__DIR__ . '/../tempimages/'.$imagefilename, file_get_contents($imageData));
-            $filetoUpload = __DIR__ . '/../tempimages/'.$imagefilename;
+            // file_put_contents(__DIR__ . '/../tempimages/'.$imagefilename, file_get_contents($imageData));
+            // $filetoUpload = __DIR__ . '/../tempimages/'.$imagefilename;
 
             $containerName = 'objectimages';
             $blobName = $imagefilename;
             
             $destinationURL = "https://$storageAccount.blob.core.windows.net/$containerName/$blobName";
             
-            uploadBlob($filetoUpload, $storageAccount, $containerName, $blobName, $destinationURL, $accesskey);
+            uploadBlob($fh, $fs, $storageAccount, $containerName, $blobName, $destinationURL, $accesskey);
             
-            unlink($filetoUpload);
+            // unlink($filetoUpload);
 
             $contentType = "text/plain";
             $name = 'Image';
@@ -360,8 +366,10 @@
             
             $destinationURL = "https://$storageAccount.blob.core.windows.net/$containerName/$blobName";
             
-            uploadBlob($filetoUpload, $storageAccount, $containerName, $blobName, $destinationURL, $accesskey);
-
+            uploadBlob($fh, $storageAccount, $containerName, $blobName, $destinationURL, $accesskey);
+            
+            unlink($filetoUpload);
+            
             $message = $destinationURL;
             //$message = $pdf->Output('svgtopdf.pdf', "E");    // send the file in
         } else {
@@ -382,11 +390,11 @@
     }
 
     //https://stackoverflow.com/questions/41682393/simple-php-curl-file-upload-to-azure-storage-blob
-    function uploadBlob($filetoUpload, $storageAccount, $containerName, $blobName, $destinationURL, $accesskey) {
+    function uploadBlob($fh, $fs, $storageAccount, $containerName, $blobName, $destinationURL, $accesskey) {
 
         $currentDate = gmdate("D, d M Y H:i:s T", time());
-        $handle = fopen($filetoUpload, "r");
-        $fileLen = filesize($filetoUpload);
+        // $handle = fopen($fh, "r");
+        $fileLen = $fs;
     
         $headerResource = "x-ms-blob-cache-control:max-age=3600\nx-ms-blob-type:BlockBlob\nx-ms-date:$currentDate\nx-ms-version:2015-12-11";
         $urlResource = "/$storageAccount/$containerName/$blobName";
@@ -428,7 +436,7 @@
         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "PUT");
-        curl_setopt($ch, CURLOPT_INFILE, $handle); 
+        curl_setopt($ch, CURLOPT_INFILE, $fh); 
         curl_setopt($ch, CURLOPT_INFILESIZE, $fileLen); 
         curl_setopt($ch, CURLOPT_UPLOAD, true); 
         $result = curl_exec($ch);
