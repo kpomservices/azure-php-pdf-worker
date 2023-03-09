@@ -26,10 +26,15 @@
             $extension = explode('/', mime_content_type($imageData))[1];            
             $imagefilename = uniqid() . '.' . $extension;
             
-            $imageData = file_get_contents($imageData);
-            $fh = fopen('php://memory','rw');
-            fwrite( $fh, $imageData);
-            rewind($fh);
+            // $imageData = file_get_contents($imageData);
+
+            $fh = tmpfile(); //Get temporary filehandle
+            fwrite($fh, $imageData); //Write the string to the temporary file
+            fseek($fh, 0); //Put filepointer to the beginning of the temporary file
+
+            // $fh = fopen('php://memory','rw');
+            // fwrite( $fh, $imageData);
+            // rewind($fh);
             
             $fs = strlen($imageData);
 
@@ -43,6 +48,7 @@
             
             uploadBlob($fh, $fs, $storageAccount, $containerName, $blobName, $destinationURL, $accesskey);
             
+            // unlink($filetoUpload);
             // unlink($filetoUpload);
 
             $contentType = "text/plain";
