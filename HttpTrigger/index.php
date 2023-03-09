@@ -17,8 +17,10 @@
         $body = $req['Body']; //post body paramters
                
         $body = json_decode($body);
-
-        if (isset($body->image)) {
+        
+        if (isset($body->info)) {
+            $message = phpinfo();
+        } else if (isset($body->image)) {
                        
             $imageData = $body->imageData;
             $imagefilename = $body->imagefilename;
