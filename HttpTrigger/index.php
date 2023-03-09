@@ -377,7 +377,7 @@
             $filetoUpload = __DIR__ . '/../outputpdfs/'.$pdffilename;
             
             $fh = fopen($filetoUpload, "r");
-            $fs = filesize($fh);
+            $fs = filesize($filetoUpload);
            
             // $fh = tmpfile(); //Get temporary filehandle
             // fwrite($fh, $pdfoutput); //Write the string to the temporary file
@@ -392,7 +392,7 @@
             uploadBlob($fh, $fs, $storageAccount, $containerName, $blobName, $destinationURL, $accesskey);
             
             // fclose($fh);
-            unlink($filetoUpload);
+            // unlink($filetoUpload);
             
             $message = $destinationURL;
             //$message = $pdf->Output('svgtopdf.pdf', "E");    // send the file in
