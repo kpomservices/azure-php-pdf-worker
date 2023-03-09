@@ -305,7 +305,7 @@
 
                     $pdf->SetXY(0, 0);
         
-                    $pdf->Image('https://papdfgen.blob.core.windows.net/objectimages/640886be6d6f2.png', 150, 10, 100, 100, '', '', 'T', false, 300, '', false, false, 0, false, false, false);
+                    $pdf->Image('https://papdfgen.blob.core.windows.net/objectimages/640886be6d6f2.png', 150, 10, 100, 100, '', '', 'T', false, 300, '', false, false, 0, false, false, true);
             
                     $pdf->StartTransform();
                     // Set Clipping Mask
