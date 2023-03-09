@@ -19,6 +19,8 @@
         $body = json_decode($body);
         
         if (isset($body->info)) {
+            $contentType = "text/plain";
+            $name = 'Info';            
             $message = phpinfo();
         } else if (isset($body->image)) {
                        
