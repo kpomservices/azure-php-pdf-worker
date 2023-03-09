@@ -49,7 +49,7 @@
             uploadBlob($fh, $fs, $storageAccount, $containerName, $blobName, $destinationURL, $accesskey);
             
             // unlink($filetoUpload);
-            // unlink($filetoUpload);
+            fclose($fh);
 
             $contentType = "text/plain";
             $name = 'Image';
