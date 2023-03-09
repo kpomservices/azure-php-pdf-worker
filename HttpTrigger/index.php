@@ -26,6 +26,7 @@
             $extension = explode('/', mime_content_type($imageData))[1];            
             $imagefilename = uniqid() . '.' . $extension;
             
+            $imageData = file_get_contents($imageData);
             $fh = fopen('php://memory','rw');
             fwrite( $fh, $imageData);
             rewind($fh);
@@ -366,7 +367,7 @@
             
             $destinationURL = "https://$storageAccount.blob.core.windows.net/$containerName/$blobName";
             
-            uploadBlob($fh, $storageAccount, $containerName, $blobName, $destinationURL, $accesskey);
+            uploadBlob($filetoUpload, $storageAccount, $containerName, $blobName, $destinationURL, $accesskey);
             
             unlink($filetoUpload);
             
