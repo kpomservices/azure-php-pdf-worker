@@ -28,14 +28,11 @@
             
             $imageData = file_get_contents($imageData);
 
+            //https://blog.niklasottosson.com/php/using-php-curl-to-put-a-string/
             $fh = tmpfile(); //Get temporary filehandle
             fwrite($fh, $imageData); //Write the string to the temporary file
             fseek($fh, 0); //Put filepointer to the beginning of the temporary file
 
-            // $fh = fopen('php://memory','rw');
-            // fwrite( $fh, $imageData);
-            // rewind($fh);
-            
             $fs = strlen($imageData);
 
             // file_put_contents(__DIR__ . '/../tempimages/'.$imagefilename, file_get_contents($imageData));
@@ -365,17 +362,25 @@
             // $contentType = "application/pdf";
             $contentType = 'text/plain';
             $name = 'PDF';
-            $pdf->Output(__DIR__ . '/../outputpdfs/'.$pdffilename, "F");    // send the file in
 
-            $filetoUpload = __DIR__ . '/../outputpdfs/'.$pdffilename;
+            $pdfoutput = $pdf->Output(__DIR__ . '/../outputpdfs/'.$pdffilename, "S");    // send the file in
+
+            //$pdf->Output(__DIR__ . '/../outputpdfs/'.$pdffilename, "F");    // send the file in
+            // $fh = __DIR__ . '/../outputpdfs/'.$pdffilename;
+                       
+            $fh = tmpfile(); //Get temporary filehandle
+            fwrite($fh, $pdfoutput); //Write the string to the temporary file
+            fseek($fh, 0); //Put filepointer to the beginning of the temporary file
+            $fs = strlen($pdfoutput);
+
             $containerName = 'outputpdfs';
             $blobName = $pdffilename;
             
             $destinationURL = "https://$storageAccount.blob.core.windows.net/$containerName/$blobName";
             
-            uploadBlob($filetoUpload, $storageAccount, $containerName, $blobName, $destinationURL, $accesskey);
+            uploadBlob($fh, $fs, $storageAccount, $containerName, $blobName, $destinationURL, $accesskey);
             
-            unlink($filetoUpload);
+            fclose($fh);
             
             $message = $destinationURL;
             //$message = $pdf->Output('svgtopdf.pdf', "E");    // send the file in
