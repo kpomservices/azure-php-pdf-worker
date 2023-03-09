@@ -305,8 +305,10 @@
 
                     $pdf->SetXY(0, 0);
         
-                    $pdf->Image('https://papdfgen.blob.core.windows.net/objectimages/640886be6d6f2.png', 150, 10, 700, 400, '', '', 'T', false, 300, '', false, false, 0, false, false, false);
+                    $out = $pdf->Image('https://papdfgen.blob.core.windows.net/objectimages/640886be6d6f2.png', 150, 10, 700, 400, '', '', 'T', false, 300, '', false, false, 0, false, false, false);
             
+                    $message .= $out;
+                    
                     $pdf->StartTransform();
                     // Set Clipping Mask
                     $pdf->Rect(
@@ -394,7 +396,7 @@
             // fclose($fh);
             // unlink($filetoUpload);
             
-            $message = $destinationURL;
+            $message .= $destinationURL;
             //$message = $pdf->Output('svgtopdf.pdf', "E");    // send the file in
         } else {
             $contentType = "text/plain";
