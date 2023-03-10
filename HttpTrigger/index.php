@@ -313,20 +313,22 @@
                     $pdf->SetXY(0, 0);
         
                     if(isset($clipbgimg)) {
-                        @$pdf->Image($clipbgimg, 0, 0, $cwidth, $cheight, '', '', 'T', false, 300, '', false, false, 0, false, false, false);
+                        // @$pdf->Image($clipbgimg, 0, 0, $cwidth, $cheight, '', '', 'T', false, 300, '', false, false, 0, false, false, false);
+                        @$pdf->Image($clipbgimg, 0, 0, '', '', '', '', 'T', false, 300, '', false, false, 0, false, false, true);
             
                         $pdf->StartTransform();
 
                         if(isset($clipLeft)) {
                             // Set Clipping Mask
                             $pdf->Rect(
-                                $clipLeft,
-                                $clipTop,
+                                $clipLeft - $clipWidth/2,
+                                $clipTop - $clipHeight/2,
                                 $clipWidth,
                                 $clipHeight,
                                 "CNZ"
                             );
-                            $pdf->setXY($clipLeft, $clipTop);
+                            //$pdf->setXY($clipLeft, $clipTop);
+                            $pdf->setXY(0, 0);
                         }
                                        
                         $pdf->ImageSVG("@" . $dataString);
