@@ -3,7 +3,7 @@
     use Azserverless\Context\FunctionContext;
 
     function run(FunctionContext $context) {
-        define('K_PATH_IMAGES', __DIR__ . '/../tempimages/');
+        define('K_PATH_CACHE', __DIR__ . '/../tempimages/');
         ini_set('max_execution_time', '1200'); //300 seconds = 5 minutes
         // ini_set('memory_limit', '512MB');
 
