@@ -5,6 +5,7 @@
     function run(FunctionContext $context) {
         //https://stackoverflow.com/questions/53612373/tcdpf-render-a-pdf-with-a-png-image-problem-with-transparent-png
         define('K_PATH_CACHE', __DIR__ . '/../tempimages/');
+        // ini_set('max_execution_time', '1200'); //300 seconds = 5 minutes
 
         $accesskey = "/1trovN9uvAh0Cvziv/GTgI9V/P/IQJg0BANb9W8beMtTd2KtwnMkpQd4eDz1JTltNoDsl/QdZLj+AStS1RcDg==";            
         $storageAccount = 'papdfgen';
@@ -33,8 +34,7 @@
             $extension = explode('/', mime_content_type($imageData))[1];            
             $imagefilename = uniqid() . '.' . $extension;
             
-            $imageData = file_get_contents($imageData);
-
+            // $imageData = file_get_contents($imageData);
             //https://blog.niklasottosson.com/php/using-php-curl-to-put-a-string/
             // $fh = tmpfile(); //Get temporary filehandle
             // fwrite($fh, $imageData); //Write the string to the temporary file
