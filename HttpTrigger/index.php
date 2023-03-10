@@ -67,6 +67,11 @@
             $jsonData = $body->jsonData;
             $cwidth = $body->cwidth;
             $cheight = $body->cheight;
+            $clipbgimg = $body->clipbgimg;
+            $clipLeft = $body->clipLeft;
+            $clipTop = $body->clipTop;
+            $clipWidth = $body->clipWidth;
+            $clipHeight = $body->clipHeight;
             $pdffilename = $body->pdffilename;
             $savecrop = 'false';
             $rows = 1;
@@ -307,24 +312,27 @@
 
                     $pdf->SetXY(0, 0);
         
-                    @$pdf->Image('https://papdfgen.blob.core.windows.net/objectimages/640866bfcbd7b.png', 0, 0, $cwidth, $cheight, 'PNG', '', 'T', false, 300, '', false, false, 0, false, false, false);
+                    if(isset($clipbgimg)) {
+                        @$pdf->Image($clipbgimg, 0, 0, $cwidth, $cheight, 'PNG', '', 'T', false, 300, '', false, false, 0, false, false, false);
             
-                    $pdf->StartTransform();
-                    // Set Clipping Mask
-                    $pdf->Rect(
-                        150,
-                        150,
-                        100,
-                        100,
-                        "CNZ"
-                    );
-                    
-                    $pdf->setXY(150, 150);
-            
-                    $pdf->ImageSVG("@" . $dataString);
-            
-                    $pdf->StopTransform();
-            
+                        $pdf->StartTransform();
+                        // Set Clipping Mask
+                        $pdf->Rect(
+                            $clipLeft,
+                            $clipTop,
+                            $clipWidth,
+                            $clipHeight,
+                            "CNZ"
+                        );
+                        
+                        $pdf->setXY(150, 150);                
+                        $pdf->ImageSVG("@" . $dataString);
+                
+                        $pdf->StopTransform();                
+                    } else {
+                        $pdf->ImageSVG("@" . $dataString);
+                    }
+
                     if ($savecrop != "false") {
                         // $pdf->cropMark(
                         //     $offsetwidth * $colscount + $cmp,
