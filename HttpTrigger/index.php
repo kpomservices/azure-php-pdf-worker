@@ -3,9 +3,8 @@
     use Azserverless\Context\FunctionContext;
 
     function run(FunctionContext $context) {
+        //https://stackoverflow.com/questions/53612373/tcdpf-render-a-pdf-with-a-png-image-problem-with-transparent-png
         define('K_PATH_CACHE', __DIR__ . '/../tempimages/');
-        ini_set('max_execution_time', '1200'); //300 seconds = 5 minutes
-        // ini_set('memory_limit', '512MB');
 
         $accesskey = "/1trovN9uvAh0Cvziv/GTgI9V/P/IQJg0BANb9W8beMtTd2KtwnMkpQd4eDz1JTltNoDsl/QdZLj+AStS1RcDg==";            
         $storageAccount = 'papdfgen';
@@ -37,14 +36,17 @@
             $imageData = file_get_contents($imageData);
 
             //https://blog.niklasottosson.com/php/using-php-curl-to-put-a-string/
-            $fh = tmpfile(); //Get temporary filehandle
-            fwrite($fh, $imageData); //Write the string to the temporary file
-            fseek($fh, 0); //Put filepointer to the beginning of the temporary file
+            // $fh = tmpfile(); //Get temporary filehandle
+            // fwrite($fh, $imageData); //Write the string to the temporary file
+            // fseek($fh, 0); //Put filepointer to the beginning of the temporary file
 
-            $fs = strlen($imageData);
+            // $fs = strlen($imageData);
 
-            // file_put_contents(__DIR__ . '/../tempimages/'.$imagefilename, file_get_contents($imageData));
-            // $filetoUpload = __DIR__ . '/../tempimages/'.$imagefilename;
+            file_put_contents(__DIR__ . '/../tempimages/'.$imagefilename, file_get_contents($imageData));
+            $filetoUpload = __DIR__ . '/../tempimages/'.$imagefilename;
+            
+            $fh = fopen($filetoUpload, "r");
+            $fs = filesize($filetoUpload);
 
             $containerName = 'objectimages';
             $blobName = $imagefilename;
@@ -53,8 +55,8 @@
             
             uploadBlob($fh, $fs, $storageAccount, $containerName, $blobName, $destinationURL, $accesskey);
             
-            // unlink($fh);
-            fclose($fh);
+            unlink($filetoUpload);
+            // fclose($fh);
 
             $contentType = "text/plain";
             $name = 'Image';
@@ -305,8 +307,6 @@
 
                     $pdf->SetXY(0, 0);
         
-                    $img = file_get_contents('https://papdfgen.blob.core.windows.net/objectimages/640866bfcbd7b.png');
-                    @$pdf->Image('@' . $img);
                     @$pdf->Image('https://papdfgen.blob.core.windows.net/objectimages/640866bfcbd7b.png', 0, 0, $cwidth, $cheight, 'PNG', '', 'T', false, 300, '', false, false, 0, false, false, false);
             
                     $pdf->StartTransform();
@@ -369,22 +369,14 @@
 
             $pdf->Close();
 
-            // $contentType = "application/pdf";
             $contentType = 'text/plain';
             $name = 'PDF';
-
-            // $pdfoutput = $pdf->Output(__DIR__ . '/../outputpdfs/'.$pdffilename, "S");    // send the file in
 
             $pdf->Output(__DIR__ . '/../outputpdfs/'.$pdffilename, "F");    // send the file in
             $filetoUpload = __DIR__ . '/../outputpdfs/'.$pdffilename;
             
             $fh = fopen($filetoUpload, "r");
             $fs = filesize($filetoUpload);
-           
-            // $fh = tmpfile(); //Get temporary filehandle
-            // fwrite($fh, $pdfoutput); //Write the string to the temporary file
-            // fseek($fh, 0); //Put filepointer to the beginning of the temporary file
-            // $fs = strlen($pdfoutput);
 
             $containerName = 'outputpdfs';
             $blobName = $pdffilename;
@@ -393,8 +385,7 @@
             
             uploadBlob($fh, $fs, $storageAccount, $containerName, $blobName, $destinationURL, $accesskey);
             
-            // fclose($fh);
-            // unlink($filetoUpload);
+            unlink($filetoUpload);
             
             $message = $destinationURL;
             //$message = $pdf->Output('svgtopdf.pdf', "E");    // send the file in
