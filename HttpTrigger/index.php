@@ -313,7 +313,7 @@
                     $pdf->SetXY(0, 0);
         
                     if(isset($clipbgimg)) {
-                        @$pdf->Image($clipbgimg, 0, 0, $cwidth, $cheight, 'PNG', '', 'T', false, 300, '', false, false, 0, false, false, false);
+                        @$pdf->Image($clipbgimg, 0, 0, $cwidth, $cheight, '', '', 'T', false, 300, '', false, false, 0, false, false, false);
             
                         $pdf->StartTransform();
                         // Set Clipping Mask
