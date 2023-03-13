@@ -314,26 +314,119 @@
         
                     if(isset($clipbgimg)) {
                         // @$pdf->Image($clipbgimg, 0, 0, $cwidth, $cheight, '', '', 'T', false, 300, '', false, false, 0, false, false, false);
-                        @$pdf->Image($clipbgimg, 0, 0, '', '', '', '', 'T', false, 300, '', false, false, 0, false, false, true);
+                        // @$pdf->Image($clipbgimg, 0, 0, '', '', '', '', 'T', false, 300, '', false, false, 0, false, false, true);
 
-                        // // -- set new background ---
-                        // // get the current page break margin
-                        // $bMargin = $pdf->getBreakMargin();
-                        // // get current auto-page-break mode
-                        // $auto_page_break = $pdf->getAutoPageBreak();
-                        // // disable auto-page-break
-                        // $pdf->SetAutoPageBreak(false, 0);
-                        // // set bacground image
-                        // $pdf->Image($clipbgimg, 0, 0, $cwidth, $cheight, '', '', '', false, 300, '', false, false, 0);
-                        // // restore auto-page-break status
-                        // $pdf->SetAutoPageBreak($auto_page_break, $bMargin);
-                        // // set the starting point for the page content
-                        // $pdf->setPageMark();
+                        // set image scale factor
+                        $pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
+
+                        // -- set new background ---
+                        // get the current page break margin
+                        $bMargin = $pdf->getBreakMargin();
+                        // get current auto-page-break mode
+                        $auto_page_break = $pdf->getAutoPageBreak();
+                        // disable auto-page-break
+                        $pdf->SetAutoPageBreak(false, 0);
+                        // set bacground image
+                        $pdf->Image($clipbgimg, 0, 0, $cwidth, $cheight, '', '', '', false, 300, '', false, false, 0);
+                        // restore auto-page-break status
+                        $pdf->SetAutoPageBreak($auto_page_break, $bMargin);
+                        // set the starting point for the page content
+                        $pdf->setPageMark();
                     }
 
                     if(isset($clipLeft)) {
 
                         $pdf->StartTransform();
+
+                    //Load neccesory fonts
+                    foreach ($fontArr as $localFont) {
+                        $fontFamily = $localFont->fontName;
+
+                        $fontStyle = $localFont->fontStyle;
+
+                        $fontWeight = $localFont->fontWeight;
+
+                        $textDecoration = $localFont->textDecoration;
+
+                        if ($fontFamily != "" && strlen($fontFamily) > 0) {
+
+                            $folderName = strtolower(str_replace(" ", "", $fontFamily));
+
+                            $fontFileName = str_replace(" ", "", $fontFamily);
+
+                            if ($fontStyle == "italic" && $fontWeight == "bold") {
+                                $fontStyle = "BoldItalic";
+                            } elseif ($fontStyle == "italic") {
+                                $fontStyle = "Italic";
+                            } elseif ($fontWeight == "bold") {
+                                $fontStyle = "Bold";
+                            } else {
+                                $fontStyle = "Regular";
+                            }
+
+                            $fontname = "";
+
+                            $fontpath =
+                                __DIR__ . "/../googlefonts/" .
+                                $folderName .
+                                "/" .
+                                $fontFileName .
+                                "-" .
+                                $fontStyle .
+                                ".ttf";
+
+                            if (file_exists($fontpath)) {
+                                $fontname = TCPDF_FONTS::addTTFfont(
+                                    $fontpath,
+                                    "TrueTypeUnicode",
+                                    "",
+                                    96
+                                );
+                            } else {
+                                $fontpath =
+                                    __DIR__ . "/../googlefonts/" .
+                                    $folderName .
+                                    "/" .
+                                    $fontFileName .
+                                    ".ttf";
+
+                                if (file_exists($fontpath)) {
+                                    $fontname = TCPDF_FONTS::addTTFfont(
+                                        $fontpath,
+                                        "TrueTypeUnicode",
+                                        "",
+                                        96
+                                    );
+                                } else {
+                                    $fontpath =
+                                        __DIR__ . "/../googlefonts/" .
+                                        $folderName .
+                                        "/" .
+                                        $fontFileName .
+                                        "-Regular.ttf";
+
+                                    if (file_exists($fontpath)) {
+                                        $fontname = TCPDF_FONTS::addTTFfont(
+                                            $fontpath,
+                                            "TrueTypeUnicode",
+                                            "",
+                                            96
+                                        );
+                                    }
+                                }
+                            }
+
+                            if ($fontStyle == "Italic") {
+                                $fontStyle = "i";
+                            } elseif ($fontStyle == "Bold") {
+                                $fontStyle = "b";
+                            } else {
+                                $fontStyle = "";
+                            }
+
+                            $pdf->SetFont($fontname, $fontStyle, 14, "", false);
+                        }
+                    }
 
                         // Set Clipping Mask
                         $pdf->Rect(
