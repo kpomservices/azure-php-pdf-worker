@@ -314,8 +314,22 @@
         
                     if(isset($clipbgimg)) {
                         // @$pdf->Image($clipbgimg, 0, 0, $cwidth, $cheight, '', '', 'T', false, 300, '', false, false, 0, false, false, false);
-                        @$pdf->Image($clipbgimg, 0, 0, '', '', '', '', 'T', false, 300, '', false, false, 0, false, false, true);
-            
+                        // @$pdf->Image($clipbgimg, 0, 0, '', '', '', '', 'T', false, 300, '', false, false, 0, false, false, true);
+
+                        // -- set new background ---
+                        // get the current page break margin
+                        $bMargin = $pdf->getBreakMargin();
+                        // get current auto-page-break mode
+                        $auto_page_break = $pdf->getAutoPageBreak();
+                        // disable auto-page-break
+                        $pdf->SetAutoPageBreak(false, 0);
+                        // set bacground image
+                        $pdf->Image($clipbgimg, 0, 0, $cwidth, $cheight, '', '', '', false, 300, '', false, false, 0);
+                        // restore auto-page-break status
+                        $pdf->SetAutoPageBreak($auto_page_break, $bMargin);
+                        // set the starting point for the page content
+                        $pdf->setPageMark();
+
                         $pdf->StartTransform();
 
                         if(isset($clipLeft)) {
