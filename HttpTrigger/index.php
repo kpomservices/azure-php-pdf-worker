@@ -236,8 +236,15 @@
                         $auto_page_break = $pdf->getAutoPageBreak();
                         // disable auto-page-break
                         $pdf->SetAutoPageBreak(false, 0);
+
+                        // Calling getimagesize() function
+                        list($imwidth, $imheight, $type, $attr) = getimagesize($clipbgimg);
+                        $scaleFactor = $cheight / $imheight;
+                        $top = 0;
+                        $left = -(($imwidth * $scaleFactor) - $cwidth) / 2;
+                
                         // set bacground image
-                        $pdf->Image($clipbgimg, 0, 0, $cwidth, $cheight, '', '', '', false, 300, '', false, false, 0);
+                        $pdf->Image($clipbgimg, $left, $top, 0, $cheight, '', '', '', false, 300, '', false, false, 0);
                         // restore auto-page-break status
                         $pdf->SetAutoPageBreak($auto_page_break, $bMargin);
                         // set the starting point for the page content
